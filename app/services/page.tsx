@@ -1,5 +1,5 @@
 import { editorial } from '@/data/editorial';
-import { Endnote, PageLead, TextLink } from '@/components/ui';
+import { Endnote, TextLink } from '@/components/ui';
 import { ServiceList } from '@/components/service-list';
 import { services } from '@/data/site';
 import { pageMetadata } from '@/lib/metadata';
@@ -9,13 +9,19 @@ export const metadata = pageMetadata('/services', 'Услуги', editorial.serv
 
 export default function ServicesPage() {
   const offers = services.filter(({ available }) => available);
-  return <>
-    <PageLead title={title} text="Работаю по договору. Стоимость и сроки фиксирую до начала проектирования. Возможна поэтапная оплата." />
+  return <div className="services-page">
+    <header className="shell services-intro">
+      <h1>{title}</h1>
+      <p className="body-copy">Работаю по договору. Стоимость и сроки фиксирую до начала проектирования. Возможна поэтапная оплата.</p>
+    </header>
     <ServiceList>
       {offers.length === 0 && <p className="services-note">Список услуг будет дополнен после подтверждения форматов работы.</p>}
-      {offers.map((service) => <details className="service-item" id={service.id} key={service.id}>
+      {offers.map((service) => <details className="service-item" id={`service-${service.id}`} key={service.id}>
         <summary>
-          <span className="service-title">{service.title}</span>
+          <span className="service-overview">
+            <span className="service-title">{service.title}</span>
+            <span className="service-description">{service.description}</span>
+          </span>
           <span className="service-price">{service.price}</span>
           <span className="service-toggle">
             <span className="service-toggle-closed">Состав и оплата</span>
@@ -24,28 +30,25 @@ export default function ServicesPage() {
           </span>
         </summary>
         <div className="service-panel">
-          <div className="service-panel-clip">
-            <div className="service-body service-details">
-              <p className="body-copy">{service.description}</p>
-              <div>
-                <h2>Что входит в услугу</h2>
-                <ol className="service-scope">
-                  {service.scope.map(({ title, items }) => <li key={title}>
-                    <h3>{title}</h3>
-                    <ul>{items.map((item) => <li key={item}>{item}</li>)}</ul>
-                  </li>)}
-                </ol>
-              </div>
-              <div className="service-payment">
-                <h2>Порядок оплаты</h2>
-                <ul>{service.payment.map((item) => <li key={item}>{item}</li>)}</ul>
-                <TextLink href={`/contact?service=${service.id}`}>Обсудить услугу</TextLink>
-              </div>
+          <div className="service-body service-details">
+            <div>
+              <h2>Что входит в услугу</h2>
+              <ol className="service-scope">
+                {service.scope.map(({ title, items }) => <li key={title}>
+                  <h3>{title}</h3>
+                  <ul>{items.map((item) => <li key={item}>{item}</li>)}</ul>
+                </li>)}
+              </ol>
+            </div>
+            <div className="service-payment">
+              <h2>Порядок оплаты</h2>
+              <ul>{service.payment.map((item) => <li key={item}>{item}</li>)}</ul>
+              <TextLink href={`/contact?service=${service.id}`}>Обсудить услугу</TextLink>
             </div>
           </div>
         </div>
       </details>)}
     </ServiceList>
     <Endnote title="Расскажите, что хотите изменить." />
-  </>;
+  </div>;
 }

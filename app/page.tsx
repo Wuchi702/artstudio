@@ -41,11 +41,16 @@ export default async function Home() {
       </figure>
     </section>
     <section className="studio-services" aria-labelledby="services-title">
-      <h2 id="services-title">Услуги</h2>
+      <div className="studio-services-heading">
+        <h2 id="services-title">Услуги</h2>
+        <TextLink href="/services">Все услуги</TextLink>
+      </div>
       <div className="studio-service-grid">
         {designPackages.length > 0 && <article className="studio-service-card studio-service-options">
-          <ServiceIcon name="design" />
-          <h3>Дизайн интерьера</h3>
+          <div className="studio-service-heading">
+            <ServiceIcon name="design" />
+            <h3>Дизайн интерьера</h3>
+          </div>
           <ul aria-label="Варианты дизайн-проекта">
             {designPackages.map(({ id, title, price }) => <li key={id}>
               <Link href={`/services#${id}`}>
@@ -56,9 +61,16 @@ export default async function Home() {
           </ul>
         </article>}
         {standaloneServices.map(({ id, title, description, price }) =>
-          <Link href={`/services#${id}`} key={id} className="studio-service-card" data-service={id} data-reveal>
-            <ServiceIcon name={id} />
-            <h3>{title}</h3><p>{description}</p><strong className="service-price">{price}</strong>
+          <Link href={`/services#${id}`} key={id} className="studio-service-card" data-service={id}>
+            <div className="studio-service-heading">
+              <ServiceIcon name={id} />
+              <h3>{title}</h3>
+            </div>
+            <p>{description}</p>
+            <div className="studio-service-footer">
+              <strong className="service-price">{price}</strong>
+              <span className="studio-service-more">Подробнее <Arrow /></span>
+            </div>
           </Link>
         )}
       </div>
