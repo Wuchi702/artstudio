@@ -38,7 +38,7 @@ export default async function ProjectPage({ params }: Props) {
   ].filter(({ value }) => value !== undefined);
   const sections = project.sections ?? ['challenge', 'concept', 'solution', 'gallery', 'materials', 'floorplan'];
 
-  return <article className={`case-page case-${project.layout ?? 'wide'}`}>
+  return <article key={slug} className={`case-page case-${project.layout ?? 'wide'}`}>
     <div className="shell case-lead">
       <TextLink href="/projects" className="back-link">Все проекты</TextLink>
       <div className="case-heading">
@@ -46,7 +46,7 @@ export default async function ProjectPage({ params }: Props) {
         {project.description && <p className="body-copy">{project.description}</p>}
       </div>
       {facts.length > 0 && <dl className="case-facts">{facts.map(({ key, value }) => <div key={key}><dt>{key}</dt><dd>{value}</dd></div>)}</dl>}
-      {project.cover && <figure className="case-cover" data-reveal>
+      {project.cover && <figure className="case-cover">
         <PhotoFrame photo={project.cover} sizes="(max-width: 720px) 94vw, 88vw" priority />
         {(project.status === 'concept' || project.status === 'visualization') && <figcaption>Интерьерная визуализация</figcaption>}
       </figure>}

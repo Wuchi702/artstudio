@@ -203,3 +203,30 @@ h1,h2,h3 { font-family: var(--display); font-weight: 500; letter-spacing: -.035e
   .about-intro .photo-frame { aspect-ratio: 5 / 4; }
   .about-intro .photo-frame img { object-position: center 29%; }
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  .case-lead .case-heading {
+    animation: case-heading-in 380ms var(--ease) both;
+  }
+  .case-cover .photo-frame {
+    animation: case-cover-in 560ms var(--ease) 75ms both;
+  }
+  .case-cover img {
+    animation: case-photo-in 630ms var(--ease) both;
+  }
+}
+
+@keyframes case-heading-in {
+  from { opacity: .35; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes case-cover-in {
+  from { clip-path: inset(0 0 22% 0 round var(--stone-radius)); opacity: .65; }
+  to { clip-path: inset(0 0 0 0 round var(--stone-radius)); opacity: 1; }
+}
+
+@keyframes case-photo-in {
+  from { transform: scale(1.045); }
+  to { transform: scale(1); }
+}
