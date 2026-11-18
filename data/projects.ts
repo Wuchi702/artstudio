@@ -1,4 +1,5 @@
 import type { Category } from '@/lib/portfolio';
+import { portfolioProjects } from './portfolio-projects';
 
 export type Photo = {
   src: string;
@@ -21,7 +22,7 @@ export type Project = {
   year?: number;
   location?: string;
   area?: number;
-  status?: 'realized' | 'concept';
+  status?: 'realized' | 'concept' | 'visualization';
   materials?: string[];
   palette?: string[];
   floorplan?: Photo;
@@ -42,7 +43,7 @@ export const imagery = {
   oakDetail: { src: '/images/oak-detail.webp', alt: 'Поверхность дубового стола, плетение стула и рукотворная керамика', caption: 'Фактура дерева и керамика' }
 } satisfies Record<string, Photo>;
 
-export const projects: Project[] = [
+const conceptProjects: Project[] = [
   {
     id: 'light', slug: 'dom-tihogo-sveta', title: 'Дом тихого света',
     category: 'houses', status: 'concept', featured: true, layout: 'wide',
@@ -76,7 +77,10 @@ export const projects: Project[] = [
   }
 ];
 
+export const projects: Project[] = portfolioProjects;
+export const allProjects: Project[] = [...projects, ...conceptProjects];
+
 export const projectTitle = (project: Project) => project.title ?? project.slug;
 export const projectPath = (project: Project) => `/projects/${project.slug}`;
 export const projectStatus = (project: Project) =>
-  project.status === 'realized' ? 'Реализованный объект' : project.status === 'concept' ? 'Концепция' : undefined;
+  project.status === 'realized' ? 'Реализованный объект' : project.status === 'concept' ? 'Концепция' : project.status === 'visualization' ? 'Визуализация' : undefined;

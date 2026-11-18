@@ -3,7 +3,14 @@ import assert from 'node:assert/strict';
 const origin = new URL(process.argv[2] ?? 'http://127.0.0.1:3000');
 const pages = [
   '/', '/projects', '/projects/dom-tihogo-sveta', '/projects/ton-duba',
-  '/projects/v-storonu-sada', '/about', '/services', '/contact'
+  '/projects/v-storonu-sada', '/about', '/services', '/contact',
+  '/projects/kuhnya-gostinaya-i-spalnya',
+  '/projects/gostinaya-i-kuhnya',
+  '/projects/interyer-s-bordovym-akcentom',
+  '/projects/svetlyy-interyer',
+  '/projects/interyer-v-dvuh-urovnyah',
+  '/projects/interyer-s-temnymi-akcentami',
+  '/projects/dva-cvetovyh-resheniya'
 ];
 const descendants = new Map();
 const resources = new Set();

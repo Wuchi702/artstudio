@@ -1,13 +1,13 @@
 export const site = {
   name: 'ArtStudio',
   wordmark: ['ART', 'STUDIO'],
-  description: 'Портфолио интерьерных концепций о естественном свете, выразительных материалах и повседневной жизни.',
+  description: 'Портфолио дизайнера интерьера. Планировки, материалы и интерьерные визуализации.',
   designer: {
     name: '',
     bio: '',
     specialization: '',
     experience: '',
-    portrait: undefined as { src: string; alt: string } | undefined
+    portrait: { src: '/images/designer-portrait.webp', alt: 'Портрет автора портфолио' } as { src: string; alt: string; position?: string } | undefined
   },
   contacts: { email: '', phone: '', telegram: '', whatsapp: '', socials: [] as { label: string; href: string }[] },
   navigation: [

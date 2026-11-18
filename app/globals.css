@@ -328,3 +328,16 @@ figcaption { margin-top: 10px; color: var(--muted); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-delay: 0ms !important; transition-duration: .01ms !important; }
 }
+
+.hero-portrait img { object-position: center 34%; }
+@media (min-width: 721px) {
+  .hero-portrait { left: 39%; }
+  .home-hero-portrait::after {
+    background: linear-gradient(90deg, var(--ink) 37%, #1618159c 51%, transparent 73%),
+      linear-gradient(0deg, #161815ac, transparent 24%);
+  }
+  .home-hero-portrait h1 { font-size: clamp(56px, 8.1vw, 130px); }
+}
+@media (max-width: 720px) {
+  .home-hero-portrait::after { background: linear-gradient(0deg, #10130ff5, #10130f9c 32%, transparent 72%); }
+}

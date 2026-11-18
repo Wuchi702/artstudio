@@ -9,7 +9,14 @@ const files = readdirSync(output, { recursive: true }).filter((file) => file.end
 const expected = [
   'index.html', 'about/index.html', 'contact/index.html', 'services/index.html',
   'projects/index.html', 'projects/dom-tihogo-sveta/index.html', 'projects/ton-duba/index.html',
-  'projects/v-storonu-sada/index.html'
+  'projects/v-storonu-sada/index.html',
+  'projects/kuhnya-gostinaya-i-spalnya/index.html',
+  'projects/gostinaya-i-kuhnya/index.html',
+  'projects/interyer-s-bordovym-akcentom/index.html',
+  'projects/svetlyy-interyer/index.html',
+  'projects/interyer-v-dvuh-urovnyah/index.html',
+  'projects/interyer-s-temnymi-akcentami/index.html',
+  'projects/dva-cvetovyh-resheniya/index.html'
 ];
 
 for (const file of expected) {

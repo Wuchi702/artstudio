@@ -2,19 +2,19 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Gallery } from '@/components/gallery';
 import { Arrow, PhotoFrame, TextLink } from '@/components/ui';
-import { projectPath, projects, projectStatus, projectTitle } from '@/data/projects';
+import { allProjects, projectPath, projects, projectStatus, projectTitle } from '@/data/projects';
 import { pageMetadata } from '@/lib/metadata';
 import { categoryLabels } from '@/lib/portfolio';
 
 type Props = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
-  return projects.map(({ slug }) => ({ slug }));
+  return allProjects.map(({ slug }) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
-  const project = projects.find((item) => item.slug === slug);
+  const project = allProjects.find((item) => item.slug === slug);
   if (project) return pageMetadata(projectPath(project), projectTitle(project), project.description ?? projectTitle(project), project.cover);
 }
 
@@ -23,7 +23,7 @@ const copyLabels = { challenge: 'Задача', concept: 'Концепция', s
 export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
   const index = projects.findIndex((item) => item.slug === slug);
-  const project = projects[index];
+  const project = allProjects.find((item) => item.slug === slug);
   if (!project) notFound();
 
   const title = projectTitle(project);
@@ -48,7 +48,7 @@ export default async function ProjectPage({ params }: Props) {
       {facts.length > 0 && <dl className="case-facts">{facts.map(({ key, value }) => <div key={key}><dt>{key}</dt><dd>{value}</dd></div>)}</dl>}
       {project.cover && <figure className="case-cover" data-reveal>
         <PhotoFrame photo={project.cover} sizes="(max-width: 720px) 94vw, 88vw" priority />
-        {status === 'Концепция' && <figcaption>Интерьерная визуализация</figcaption>}
+        {(project.status === 'concept' || project.status === 'visualization') && <figcaption>Интерьерная визуализация</figcaption>}
       </figure>}
     </div>
     <div className="shell case-content">

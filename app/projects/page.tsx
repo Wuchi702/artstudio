@@ -9,7 +9,7 @@ export const metadata = pageMetadata('/projects', 'Проекты', editorial.pr
 
 export default function ProjectsPage() {
   return <>
-    <PageLead title="Проекты" text={projects.every((project) => project.status === 'concept') ? editorial.projects.conceptIntro : undefined} />
+    <PageLead title="Проекты" text={'Интерьерные визуализации из портфолио автора.'} />
     <section className="shell archive" aria-label="Портфолио">
       <Suspense fallback={<ProjectGrid projects={projects} />}>
         <ProjectIndex projects={projects} />

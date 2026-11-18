@@ -6,12 +6,12 @@ import { imagery, projects } from '@/data/projects';
 import { site } from '@/data/site';
 import { pageMetadata } from '@/lib/metadata';
 
-export const metadata = pageMetadata('/', `${site.name} — Дизайнер интерьера`, site.description, imagery.garden);
+export const metadata = pageMetadata('/', `${site.name} — Дизайнер интерьера`, site.description, site.designer.portrait ?? imagery.garden);
 
 export default function Home() {
   const selected = projects.filter((project) => project.featured);
   return <>
-    <section className="home-hero" aria-labelledby="hero-title">
+    <section className={site.designer.portrait ? "home-hero home-hero-portrait" : "home-hero"} aria-labelledby="hero-title">
       <HeroImage />
       <div className="shell hero-wrap">
         <div className="hero-content">
@@ -25,7 +25,9 @@ export default function Home() {
         </div>
         <div className="hero-caption" data-hero-meta>
           <a href="#work" className="down-link" aria-label="Перейти к проектам"><Arrow direction="down" /></a>
-          <Link href="/projects/v-storonu-sada"><span>В сторону сада</span><span>Интерьерная концепция <Arrow /></span></Link>
+          {site.designer.portrait
+            ? <Link href="/about"><span>{site.designer.name || 'Об авторе'}</span><span>Познакомиться <Arrow /></span></Link>
+            : <Link href="/projects/v-storonu-sada"><span>В сторону сада</span><span>Интерьерная концепция <Arrow /></span></Link>}
         </div>
       </div>
     </section>
