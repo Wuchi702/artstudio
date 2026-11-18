@@ -15,16 +15,24 @@ export default function ServicesPage() {
       {offers.map((service, index) => <details className="service-item" key={service.id} id={service.id} open={index === 0 ? true : undefined}>
         <summary>
           <span className="service-title">{service.title}</span>
+          <span className="service-price">{service.price}</span>
           <span className="disclosure-mark" aria-hidden="true" />
         </summary>
-        <div className="service-body">
-          <div><p className="body-copy">{service.description}</p>
+        <div className="service-body service-details">
+          <p className="body-copy">{service.description}</p>
+          <div>
+            <h2>Что входит в услугу</h2>
+            <ol className="service-scope">
+              {service.scope.map(({ title, items }) => <li key={title}>
+                <h3>{title}</h3>
+                <ul>{items.map((item) => <li key={item}>{item}</li>)}</ul>
+              </li>)}
+            </ol>
           </div>
-          <div><h2>Что входит</h2><ul>{service.scope.map((item) => <li key={item}>{item}</li>)}</ul></div>
-          <div><h2>Результат</h2><p>{service.outcome}</p>
-            <TextLink href={service.available ? `/contact?service=${service.id}` : '/contact'}>
-              {service.available ? 'Обсудить услугу' : 'Узнать о доступности'}
-            </TextLink>
+          <div className="service-payment">
+            <h2>Порядок оплаты</h2>
+            <ul>{service.payment.map((item) => <li key={item}>{item}</li>)}</ul>
+            <TextLink href={`/contact?service=${service.id}`}>Обсудить услугу</TextLink>
           </div>
         </div>
       </details>)}

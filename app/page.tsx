@@ -12,9 +12,10 @@ import { pageMetadata } from '@/lib/metadata';
 const cover = imagery.light;
 export const metadata = pageMetadata('/', 'Дизайн интерьера', site.description, cover);
 
-const scopes = ['design', 'planning', 'home-staging'];
+const scopes = ['design', 'turnkey', 'planning', 'home-staging'];
 const icons = [
   'M3 11l9-7 9 7M5 10v10h14V10M10 20v-6h4v6',
+  'M3 11l9-7 9 7M5 10v10h14V10M9 15h6M9 12h6',
   'M4 4h16v16H4zM10 4v9h10M4 15h6v5',
   'M5 12V8a2 2 0 012-2h10a2 2 0 012 2v4M5 17h14M5 19v-2m14 2v-2M5 17H3v-5h4v2h10v-2h4v5h-2'
 ];
@@ -40,7 +41,7 @@ export default async function Home() {
           if (!service) return null;
           return <Link href={`/services#${id}`} key={id} className="studio-service-card" data-reveal>
             <svg aria-hidden="true" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth=".8"><path d={icons[index]} /></svg>
-            <h3>{service.title}</h3><p>{service.description}</p>
+            <h3>{service.title}</h3><p>{service.description}</p><strong className="service-price">{service.price}</strong>
           </Link>;
         })}
       </div>

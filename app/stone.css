@@ -109,3 +109,29 @@ h1,h2,h3 { font-family: var(--display); font-weight: 500; letter-spacing: -.035e
   .studio-service-grid { grid-template-columns: 1fr; }
   .studio-service-card { padding: 20px; }
 }
+
+.studio-service-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.studio-service-card { grid-template-rows: auto auto 1fr auto; }
+.service-price { color: var(--coffee); font-size: 1rem; font-weight: 650; white-space: nowrap; }
+.service-item summary .service-title { flex: 1; }
+.service-details { grid-template-columns: minmax(0, 1fr) minmax(190px, .52fr); gap: 24px 36px; }
+.service-details > .body-copy { grid-column: 1 / -1; max-width: 65ch; }
+.service-details h2 { font-size: 17px; }
+.service-details .service-scope { display: grid; gap: 16px; margin: 14px 0 0; padding-inline-start: 24px; }
+.service-scope h3 { font: 650 1rem/1.4 var(--sans); letter-spacing: normal; }
+.service-scope ul { margin-top: 4px; }
+.service-payment { align-self: start; padding: 20px; background: var(--surface); border-radius: 12px; }
+.service-payment li + li { margin-top: 6px; }
+.service-payment .text-link { margin-top: 12px; }
+@media (max-width: 900px) {
+  .studio-service-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .service-item summary { display: grid; grid-template-columns: minmax(0, 1fr) auto; }
+  .service-item summary .service-price { grid-column: 1; }
+  .service-item summary .disclosure-mark { grid-column: 2; grid-row: 1 / 3; }
+  .service-details { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 470px) {
+  .studio-service-grid { grid-template-columns: minmax(0, 1fr); }
+}
