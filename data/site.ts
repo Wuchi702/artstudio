@@ -1,16 +1,18 @@
 export const site = {
-  name: 'Signature Interior',
-  wordmark: ['Signature', 'Interior'],
+  name: 'ArtStudio',
+  wordmark: ['ART', 'STUDIO'],
   description: 'Портфолио интерьерных концепций о естественном свете, выразительных материалах и повседневной жизни.',
   designer: {
     name: '',
     bio: '',
+    specialization: '',
+    experience: '',
     portrait: undefined as { src: string; alt: string } | undefined
   },
-  contacts: { email: '', phone: '' },
+  contacts: { email: '', phone: '', telegram: '', whatsapp: '', socials: [] as { label: string; href: string }[] },
   navigation: [
     { label: 'Проекты', href: '/projects' },
-    { label: 'Подход', href: '/about' },
+    { label: 'Обо мне', href: '/about' },
     { label: 'Услуги', href: '/services' }
   ],
   cta: 'Обсудить проект'

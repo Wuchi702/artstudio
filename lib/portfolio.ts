@@ -1,14 +1,17 @@
 export const categoryLabels = {
   apartments: 'Квартиры',
-  houses: 'Дома',
-  commercial: 'Коммерческие',
+  houses: 'Частные дома',
+  commercial: 'Коммерческие интерьеры',
   other: 'Другие'
 } as const;
 
 export type Category = keyof typeof categoryLabels;
 
-export function filterProjects<T extends { category?: Category }>(projects: readonly T[], category: Category | 'all') {
-  return category === 'all' ? projects : projects.filter((project) => (project.category ?? 'other') === category);
+export type ProjectFilter = Category | 'concept' | 'all';
+
+export function filterProjects<T extends { category?: Category; status?: string }>(projects: readonly T[], category: ProjectFilter) {
+  if (category === 'all') return projects;
+  return projects.filter((project) => category === 'concept' ? project.status === 'concept' : (project.category ?? 'other') === category);
 }
 
 export function wrapIndex(index: number, length: number) {

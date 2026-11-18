@@ -46,7 +46,7 @@ export default async function ProjectPage({ params }: Props) {
         {project.description && <p className="body-copy">{project.description}</p>}
       </div>
       {facts.length > 0 && <dl className="case-facts">{facts.map(({ key, value }) => <div key={key}><dt>{key}</dt><dd>{value}</dd></div>)}</dl>}
-      {project.cover && <figure className="case-cover">
+      {project.cover && <figure className="case-cover" data-reveal>
         <PhotoFrame photo={project.cover} sizes="(max-width: 720px) 94vw, 88vw" priority />
         {status === 'Концепция' && <figcaption>Интерьерная визуализация</figcaption>}
       </figure>}
@@ -68,7 +68,7 @@ export default async function ProjectPage({ params }: Props) {
             {!!project.palette?.length && <ul className="palette" aria-label="Палитра проекта">{project.palette.map((color) => <li key={color} style={{ backgroundColor: color }} aria-label={color} />)}</ul>}
           </div>
         </section> : null;
-        return project[section] ? <section className="case-copy" key={section}>
+        return project[section] ? <section className="case-copy" key={section} data-copy-reveal>
           <h2>{copyLabels[section]}</h2>
           <p className="body-copy">{project[section]}</p>
         </section> : null;

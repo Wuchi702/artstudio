@@ -15,3 +15,9 @@ test('gallery navigation wraps in both directions', () => {
   assert.equal(wrapIndex(3, 3), 0);
   assert.equal(wrapIndex(1, 0), 0);
 });
+
+test('concept is independent of property category', () => {
+  const items = [{ category: 'houses', status: 'concept' }, { category: 'houses', status: 'realized' }];
+  assert.deepEqual(filterProjects(items, 'concept'), [items[0]]);
+  assert.deepEqual(filterProjects(items, 'houses'), items);
+});

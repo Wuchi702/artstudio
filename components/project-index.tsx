@@ -1,12 +1,14 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { useRef } from 'react';
 import type { Project } from '@/data/projects';
-import { categoryLabels, filterProjects, type Category } from '@/lib/portfolio';
+import { categoryLabels, filterProjects, type ProjectFilter } from '@/lib/portfolio';
 import { ProjectCard } from './project-card';
 
-const categories = Object.entries(categoryLabels) as [Category, string][];
+const categories: [ProjectFilter, string][] = [
+  ...Object.entries(categoryLabels) as [ProjectFilter, string][],
+  ['concept', 'Концепции']
+];
 
 export function ProjectGrid({ projects }: { projects: readonly Project[] }) {
   return <div className="project-grid archive-grid">
@@ -15,34 +17,28 @@ export function ProjectGrid({ projects }: { projects: readonly Project[] }) {
 }
 
 export function ProjectIndex({ projects }: { projects: Project[] }) {
-  const allButton = useRef<HTMLButtonElement>(null);
+  const available = categories.filter(([key]) => filterProjects(projects, key).length > 0);
   const parameter = useSearchParams().get('category');
-  const category = categories.find(([key]) => key === parameter)?.[0] ?? 'all';
+  const category = available.find(([key]) => key === parameter)?.[0] ?? 'all';
   const filtered = filterProjects(projects, category);
 
-  function select(next: Category | 'all') {
+  function select(next: ProjectFilter) {
     const url = new URL(window.location.href);
     if (next === 'all') url.searchParams.delete('category');
     else url.searchParams.set('category', next);
-    window.history.replaceState(null, '', url);
+    window.history.pushState(null, '', url);
   }
 
   return <>
     <div className="filter-bar">
       <div className="filter-options" role="group" aria-label="Категории проектов">
-        <button ref={allButton} type="button" aria-pressed={category === 'all'} onClick={() => select('all')}>Все проекты</button>
-        {categories.map(([key, label]) => <button key={key} type="button" aria-pressed={category === key} onClick={() => select(key)}>{label}</button>)}
+        <button type="button" aria-pressed={category === 'all'} onClick={() => select('all')}>Все проекты</button>
+        {available.map(([key, label]) => <button key={key} type="button" aria-pressed={category === key} onClick={() => select(key)}>{label}</button>)}
       </div>
       <span className="filter-count" aria-live="polite">Проектов: {filtered.length}</span>
     </div>
     {filtered.length > 0
       ? <div key={category} className="filtered-enter"><ProjectGrid projects={filtered} /></div>
-      : <div className="portfolio-empty">
-          <h2>Проекты этой категории появятся позже.</h2>
-          <button className="text-link" type="button" onClick={() => {
-            select('all');
-            allButton.current?.focus();
-          }}>Показать все проекты</button>
-        </div>}
+      : <p className="portfolio-empty">Проекты скоро появятся.</p>}
   </>;
 }

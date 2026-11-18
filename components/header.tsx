@@ -22,7 +22,6 @@ export function Header() {
       <nav aria-label="Основная навигация" className="desktop-nav">
         {navigation.map(({ label, href }) => <Link key={href} href={href} aria-current={current(href) ? 'page' : undefined}>{label}</Link>)}
       </nav>
-      <Link className="header-cta" href="/contact">{site.cta}<Arrow /></Link>
       <details ref={menu} className="mobile-menu" onKeyDown={(event) => {
         if (event.key === 'Escape' && menu.current?.open) {
           close();
@@ -30,7 +29,7 @@ export function Header() {
         }
       }}>
         <summary ref={toggle}><span className="label-open">Меню</span><span className="label-close">Закрыть</span><span className="menu-mark" aria-hidden="true" /></summary>
-        <nav aria-label="Мобильная навигация" className="mobile-panel">
+        <nav aria-label="Развёрнутая навигация" className="mobile-panel">
           <Link onClick={close} href="/" aria-current={pathname === '/' ? 'page' : undefined}>Главная</Link>
           {navigation.map(({ label, href }) =>
             <Link key={href} onClick={close} href={href} aria-current={current(href) ? 'page' : undefined}>{label}<Arrow /></Link>

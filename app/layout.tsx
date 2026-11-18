@@ -1,10 +1,8 @@
 import { assetPath } from '@/lib/asset-path';
 import type { Metadata } from 'next';
-import '@fontsource/cormorant-garamond/cyrillic-500.css';
-import '@fontsource/cormorant-garamond/cyrillic-500-italic.css';
-import '@fontsource/cormorant-garamond/latin-500.css';
-import '@fontsource/cormorant-garamond/latin-500-italic.css';
-import '@fontsource-variable/manrope';
+import '@fontsource-variable/onest';
+import '@fontsource/ibm-plex-mono/cyrillic-500.css';
+import '@fontsource/ibm-plex-mono/latin-500.css';
 import './globals.css';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
@@ -18,7 +16,7 @@ export const metadata: Metadata = {
   metadataBase: origin,
   title: { default: `${site.name} — Дизайн интерьера`, template: `%s — ${site.name}` },
   description: site.description,
-  openGraph: { type: 'website', locale: 'ru_RU', siteName: site.name, ...(origin ? { images: [assetPath('/images/hero.webp')] } : {}) },
+  openGraph: { type: 'website', locale: 'ru_RU', siteName: site.name, ...(origin ? { images: [assetPath('/images/garden.webp')] } : {}) },
   robots: origin ? undefined : { index: false, follow: false }
 };
 

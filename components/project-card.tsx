@@ -7,8 +7,10 @@ export function ProjectCard({ project, index, heading: Heading = 'h3' }: { proje
   const title = projectTitle(project);
   return <article className={`project-card project-card-${project.layout ?? 'landscape'}`} data-reveal>
     <Link href={projectPath(project)} className="project-card-link">
-      {project.cover && <PhotoFrame photo={project.cover} className="project-card-photo"
-        sizes={project.layout === 'wide' ? '(max-width: 720px) 100vw, 60vw' : '(max-width: 720px) 100vw, 42vw'} />}
+      {project.cover && <div className="project-visual"><PhotoFrame photo={project.cover} className="project-card-photo"
+        sizes={project.layout === 'wide' ? '(max-width: 720px) 100vw, 60vw' : '(max-width: 720px) 100vw, 42vw'} />
+        <span className="project-hover" aria-hidden="true">Смотреть проект <Arrow /></span>
+      </div>}
       <div className="project-card-caption">
         <span className="project-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
         <div>

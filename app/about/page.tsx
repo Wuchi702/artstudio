@@ -12,14 +12,15 @@ export default function AboutPage() {
   return <>
     <PageLead label={designer.name ? 'Обо мне' : undefined} title={designer.name || 'Обо мне'} text={about.intro} />
     <section className="shell about-story" aria-labelledby="about-title">
-      <figure>
+      <figure data-reveal>
         <PhotoFrame photo={designer.portrait ?? imagery.atelier} sizes="(max-width: 720px) 92vw, 46vw" priority />
         {!designer.portrait && <figcaption>{imagery.atelier.caption}</figcaption>}
       </figure>
       <div>
-        <h2 id="about-title">{about.heading[0]}<br/>{about.heading[1]}</h2>
+        <h2 id="about-title" data-copy-reveal>{about.heading[0]}<br/>{about.heading[1]}</h2>
         <p className="body-copy">{designer.bio || about.approach}</p>
-        <p className="body-copy">{about.nextStep}</p>
+        {designer.specialization && <p className="body-copy">{designer.specialization}</p>}
+        {designer.experience && <p className="body-copy">{designer.experience}</p>}
       </div>
     </section>
     <section className="shell principle-section" aria-labelledby="principles-title">

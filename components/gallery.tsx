@@ -16,6 +16,7 @@ export function Gallery({ photos, title }: { photos: Photo[]; title: string }) {
   const [opened, setOpened] = useState(false);
   const change = (direction: number) => setIndex((current) => wrapIndex(current + direction, photos.length));
   const photo = photos[index];
+  const next = photos.length > 1 ? photos[wrapIndex(index + 1, photos.length)] : undefined;
 
   function open(at: number, button: HTMLButtonElement) {
     openingButton.current = button;
@@ -65,7 +66,9 @@ export function Gallery({ photos, title }: { photos: Photo[]; title: string }) {
           }
           touchStart.current = null;
         }}>
-        {opened && photo && <Image key={index} src={assetPath(photo.src)} alt={photo.alt} fill sizes="94vw" />}
+        {opened && photo && <Image key={index} src={assetPath(photo.src)} alt={photo.alt} fill sizes="94vw" loading="eager" />}
+        {opened && next && <Image src={assetPath(next.src)} alt="" aria-hidden="true" className="visually-hidden"
+          width={1} height={1} sizes="94vw" loading="eager" fetchPriority="low" />}
       </div>
       <div className="lightbox-footer">
         <button type="button" disabled={photos.length < 2} aria-label="Предыдущее изображение" onClick={() => change(-1)}><Arrow direction="left" /></button>
