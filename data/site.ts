@@ -12,8 +12,7 @@ export const site = {
   contacts: { email: '', phone: '', telegram: '', whatsapp: '', socials: [] as { label: string; href: string }[] },
   navigation: [
     { label: 'Проекты', href: '/projects' },
-    { label: 'Обо мне', href: '/about' },
-    { label: 'Услуги', href: '/services' }
+    { label: 'Обо мне', href: '/about' }
   ],
   cta: 'Обсудить проект'
 };

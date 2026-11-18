@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { Arrow, PhotoFrame, TextLink } from '@/components/ui';
 import { InquiryForm } from '@/components/inquiry-form';
 import { ProjectCard } from '@/components/project-card';
+import { ServiceCard } from '@/components/service-card';
+import { ServiceOffer } from '@/components/service-offer';
 import { imagery, projects } from '@/data/projects';
 import { services, site } from '@/data/site';
 import { connection } from 'next/server';
@@ -44,21 +46,28 @@ export default async function Home() {
       </figure>
     </section>
     <section className="studio-services" aria-labelledby="services-title">
-      <div className="studio-services-heading">
-        <h2 id="services-title">Услуги</h2>
-        <TextLink href="/services">Все услуги</TextLink>
-      </div>
+      <h2 id="services-title">Услуги</h2>
       <div className="studio-service-grid">
-        {homeServices.map(({ id, title, description }) => {
+        {homeServices.map((service) => {
+          const { id, description } = service;
           const isDesign = id === 'design';
-          return <Link href={`/services#${id}`} key={id} className="studio-service-card" data-service={id}>
-            <div className="studio-service-heading">
+          const title = isDesign ? 'Дизайн интерьера' : service.title;
+          const offers = isDesign
+            ? services.filter((offer) => offer.available && (offer.id === 'design' || offer.id === 'turnkey'))
+            : [service];
+
+          return <ServiceCard key={id} id={id} title={title} preview={<>
+            <span className="studio-service-heading">
               <ServiceIcon name={id} />
-              <h3>{isDesign ? 'Дизайн интерьера' : title}</h3>
-            </div>
-            <p>{homeServiceDescriptions[id] ?? description}</p>
+              <span className="studio-service-title">{title}</span>
+            </span>
+            <span className="studio-service-description">{homeServiceDescriptions[id] ?? description}</span>
             <span className="studio-service-more">Подробнее <Arrow /></span>
-          </Link>;
+          </>}>
+            <div className="service-offers" data-multiple={offers.length > 1 || undefined}>
+              {offers.map((offer) => <ServiceOffer key={offer.id} service={offer} showTitle={offers.length > 1} />)}
+            </div>
+          </ServiceCard>;
         })}
       </div>
     </section>

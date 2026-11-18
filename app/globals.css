@@ -54,8 +54,8 @@ figcaption { margin-top: 10px; color: var(--muted); }
 .desktop-nav a { display: flex; min-height: 44px; align-items: center; font-size: 13px; }
 .desktop-nav a:is(:hover,[aria-current]) { color: var(--sage); }
 .mobile-menu { justify-self: end; }
-.mobile-menu summary, .service-item summary { list-style: none; }
-.mobile-menu summary::-webkit-details-marker, .service-item summary::-webkit-details-marker { display: none; }
+.mobile-menu summary { list-style: none; }
+.mobile-menu summary::-webkit-details-marker { display: none; }
 .mobile-menu summary { display: flex; min-height: 44px; align-items: center; gap: 12px; font: 500 12px/1 var(--mono); }
 .mobile-menu[open] .label-open, .mobile-menu:not([open]) .label-close { display: none; }
 .menu-mark { position: relative; width: 26px; height: 16px; color: var(--sage); }
@@ -214,8 +214,6 @@ figcaption { margin-top: 10px; color: var(--muted); }
 .principle-list li::before { content: counter(principle, decimal-leading-zero); font: 500 12px/1.5 var(--mono); }
 .principle-list h3 { font-size: clamp(26px, 3.4vw, 50px); }
 
-.services-list { padding-bottom: var(--vertical); }
-.services-note { max-width: 46ch; color: var(--muted); padding: 18px 0; border-top: 1px solid var(--rule); }
 
 .contact-layout { display: grid; grid-template-columns: .92fr 1fr; align-items: start; gap: clamp(28px, 6vw, 99px); padding-block: var(--vertical); }
 .contact-copy h1 { font-size: clamp(49px, 6.6vw, 98px); }

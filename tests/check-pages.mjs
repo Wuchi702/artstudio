@@ -7,7 +7,7 @@ const origin = new URL(process.env.SITE_URL ?? 'https://example.com');
 const output = 'out';
 const files = readdirSync(output, { recursive: true }).filter((file) => file.endsWith('/index.html') || file === 'index.html');
 const expected = [
-  'index.html', 'about/index.html', 'contact/index.html', 'services/index.html',
+  'index.html', 'about/index.html', 'contact/index.html',
   'projects/index.html', 'projects/dom-tihogo-sveta/index.html', 'projects/ton-duba/index.html',
   'projects/v-storonu-sada/index.html',
   'projects/kuhnya-gostinaya-i-spalnya/index.html',
