@@ -25,6 +25,11 @@ export const portfolioProjects = [
         "caption": "Кухня-гостиная, другой ракурс"
       },
       {
+        "src": "/images/portfolio/kuhnya-gostinaya-i-spalnya-5.webp",
+        "alt": "Кухня-гостиная и спальня — спальня",
+        "caption": "Спальня"
+      },
+      {
         "src": "/images/portfolio/kuhnya-gostinaya-i-spalnya-3.webp",
         "alt": "Кухня-гостиная и спальня — прихожая",
         "caption": "Прихожая"
@@ -33,11 +38,6 @@ export const portfolioProjects = [
         "src": "/images/portfolio/kuhnya-gostinaya-i-spalnya-4.webp",
         "alt": "Кухня-гостиная и спальня — санузел",
         "caption": "Санузел"
-      },
-      {
-        "src": "/images/portfolio/kuhnya-gostinaya-i-spalnya-5.webp",
-        "alt": "Кухня-гостиная и спальня — спальня",
-        "caption": "Спальня"
       }
     ],
     "sections": [
@@ -68,14 +68,14 @@ export const portfolioProjects = [
         "caption": "Кухня"
       },
       {
-        "src": "/images/portfolio/gostinaya-i-kuhnya-3.webp",
-        "alt": "Гостиная и кухня — прихожая",
-        "caption": "Прихожая"
-      },
-      {
         "src": "/images/portfolio/gostinaya-i-kuhnya-4.webp",
         "alt": "Гостиная и кухня — спальня",
         "caption": "Спальня"
+      },
+      {
+        "src": "/images/portfolio/gostinaya-i-kuhnya-3.webp",
+        "alt": "Гостиная и кухня — прихожая",
+        "caption": "Прихожая"
       },
       {
         "src": "/images/portfolio/gostinaya-i-kuhnya-5.webp",
@@ -95,30 +95,30 @@ export const portfolioProjects = [
     "featured": true,
     "layout": "landscape",
     "cover": {
-      "src": "/images/portfolio/interyer-s-bordovym-akcentom-1.webp",
-      "alt": "Интерьер с бордовым акцентом — ракурс 1",
-      "caption": "Ракурс 1"
+      "src": "/images/portfolio/interyer-s-bordovym-akcentom-2.webp",
+      "alt": "Интерьер с бордовым акцентом — спальня — общий план",
+      "caption": "Спальня — общий план"
     },
     "gallery": [
       {
-        "src": "/images/portfolio/interyer-s-bordovym-akcentom-1.webp",
-        "alt": "Интерьер с бордовым акцентом — ракурс 1",
-        "caption": "Ракурс 1"
-      },
-      {
         "src": "/images/portfolio/interyer-s-bordovym-akcentom-2.webp",
-        "alt": "Интерьер с бордовым акцентом — ракурс 2",
-        "caption": "Ракурс 2"
+        "alt": "Интерьер с бордовым акцентом — спальня — общий план",
+        "caption": "Спальня — общий план"
       },
       {
         "src": "/images/portfolio/interyer-s-bordovym-akcentom-3.webp",
-        "alt": "Интерьер с бордовым акцентом — ракурс 3",
-        "caption": "Ракурс 3"
+        "alt": "Интерьер с бордовым акцентом — спальня — вид со стороны кровати",
+        "caption": "Спальня — вид со стороны кровати"
       },
       {
         "src": "/images/portfolio/interyer-s-bordovym-akcentom-4.webp",
-        "alt": "Интерьер с бордовым акцентом — ракурс 4",
-        "caption": "Ракурс 4"
+        "alt": "Интерьер с бордовым акцентом — зона отдыха — общий план",
+        "caption": "Зона отдыха — общий план"
+      },
+      {
+        "src": "/images/portfolio/interyer-s-bordovym-akcentom-1.webp",
+        "alt": "Интерьер с бордовым акцентом — зона отдыха — деталь",
+        "caption": "Зона отдыха — деталь"
       }
     ],
     "sections": [
@@ -132,29 +132,29 @@ export const portfolioProjects = [
     "status": "visualization",
     "cover": {
       "src": "/images/portfolio/svetlyy-interyer-1.webp",
-      "alt": "Светлый интерьер — ракурс 1",
-      "caption": "Ракурс 1"
+      "alt": "Светлый интерьер — спальня — общий план",
+      "caption": "Спальня — общий план"
     },
     "gallery": [
       {
         "src": "/images/portfolio/svetlyy-interyer-1.webp",
-        "alt": "Светлый интерьер — ракурс 1",
-        "caption": "Ракурс 1"
-      },
-      {
-        "src": "/images/portfolio/svetlyy-interyer-2.webp",
-        "alt": "Светлый интерьер — ракурс 2",
-        "caption": "Ракурс 2"
-      },
-      {
-        "src": "/images/portfolio/svetlyy-interyer-3.webp",
-        "alt": "Светлый интерьер — ракурс 3",
-        "caption": "Ракурс 3"
+        "alt": "Светлый интерьер — спальня — общий план",
+        "caption": "Спальня — общий план"
       },
       {
         "src": "/images/portfolio/svetlyy-interyer-4.webp",
-        "alt": "Светлый интерьер — ракурс 4",
-        "caption": "Ракурс 4"
+        "alt": "Светлый интерьер — вид на спальню со стороны кровати",
+        "caption": "Вид на спальню со стороны кровати"
+      },
+      {
+        "src": "/images/portfolio/svetlyy-interyer-2.webp",
+        "alt": "Светлый интерьер — вид на комод и тв-зону",
+        "caption": "Вид на комод и ТВ-зону"
+      },
+      {
+        "src": "/images/portfolio/svetlyy-interyer-3.webp",
+        "alt": "Светлый интерьер — туалетный столик",
+        "caption": "Туалетный столик"
       }
     ],
     "sections": [
@@ -183,11 +183,6 @@ export const portfolioProjects = [
         "caption": "Кухня-гостиная, другой ракурс"
       },
       {
-        "src": "/images/portfolio/interyer-v-dvuh-urovnyah-3.webp",
-        "alt": "Интерьер в двух уровнях — постирочная",
-        "caption": "Постирочная"
-      },
-      {
         "src": "/images/portfolio/interyer-v-dvuh-urovnyah-4.webp",
         "alt": "Интерьер в двух уровнях — прихожая",
         "caption": "Прихожая"
@@ -201,6 +196,11 @@ export const portfolioProjects = [
         "src": "/images/portfolio/interyer-v-dvuh-urovnyah-6.webp",
         "alt": "Интерьер в двух уровнях — холл второго этажа",
         "caption": "Холл второго этажа"
+      },
+      {
+        "src": "/images/portfolio/interyer-v-dvuh-urovnyah-3.webp",
+        "alt": "Интерьер в двух уровнях — постирочная",
+        "caption": "Постирочная"
       }
     ],
     "sections": [
@@ -214,29 +214,29 @@ export const portfolioProjects = [
     "status": "visualization",
     "cover": {
       "src": "/images/portfolio/interyer-s-temnymi-akcentami-1.webp",
-      "alt": "Интерьер с тёмными акцентами — ракурс 1",
-      "caption": "Ракурс 1"
+      "alt": "Интерьер с тёмными акцентами — спальня — общий план",
+      "caption": "Спальня — общий план"
     },
     "gallery": [
       {
         "src": "/images/portfolio/interyer-s-temnymi-akcentami-1.webp",
-        "alt": "Интерьер с тёмными акцентами — ракурс 1",
-        "caption": "Ракурс 1"
-      },
-      {
-        "src": "/images/portfolio/interyer-s-temnymi-akcentami-2.webp",
-        "alt": "Интерьер с тёмными акцентами — ракурс 2",
-        "caption": "Ракурс 2"
-      },
-      {
-        "src": "/images/portfolio/interyer-s-temnymi-akcentami-3.webp",
-        "alt": "Интерьер с тёмными акцентами — ракурс 3",
-        "caption": "Ракурс 3"
+        "alt": "Интерьер с тёмными акцентами — спальня — общий план",
+        "caption": "Спальня — общий план"
       },
       {
         "src": "/images/portfolio/interyer-s-temnymi-akcentami-4.webp",
-        "alt": "Интерьер с тёмными акцентами — ракурс 4",
-        "caption": "Ракурс 4"
+        "alt": "Интерьер с тёмными акцентами — вид из гостиной в прихожую",
+        "caption": "Вид из гостиной в прихожую"
+      },
+      {
+        "src": "/images/portfolio/interyer-s-temnymi-akcentami-2.webp",
+        "alt": "Интерьер с тёмными акцентами — прихожая",
+        "caption": "Прихожая"
+      },
+      {
+        "src": "/images/portfolio/interyer-s-temnymi-akcentami-3.webp",
+        "alt": "Интерьер с тёмными акцентами — шкаф в прихожей",
+        "caption": "Шкаф в прихожей"
       }
     ],
     "sections": [
@@ -250,49 +250,49 @@ export const portfolioProjects = [
     "status": "visualization",
     "cover": {
       "src": "/images/portfolio/dva-cvetovyh-resheniya-1.webp",
-      "alt": "Два цветовых решения — зелёная палитра",
-      "caption": "Зелёная палитра"
+      "alt": "Два цветовых решения — зелёная палитра — гостиная",
+      "caption": "Зелёная палитра — гостиная"
     },
     "gallery": [
       {
         "src": "/images/portfolio/dva-cvetovyh-resheniya-1.webp",
-        "alt": "Два цветовых решения — зелёная палитра",
-        "caption": "Зелёная палитра"
+        "alt": "Два цветовых решения — зелёная палитра — гостиная",
+        "caption": "Зелёная палитра — гостиная"
       },
       {
         "src": "/images/portfolio/dva-cvetovyh-resheniya-2.webp",
-        "alt": "Два цветовых решения — зелёная палитра, ракурс 2",
-        "caption": "Зелёная палитра, ракурс 2"
-      },
-      {
-        "src": "/images/portfolio/dva-cvetovyh-resheniya-3.webp",
-        "alt": "Два цветовых решения — зелёная палитра, ракурс 3",
-        "caption": "Зелёная палитра, ракурс 3"
+        "alt": "Два цветовых решения — зелёная палитра — кухня и столовая",
+        "caption": "Зелёная палитра — кухня и столовая"
       },
       {
         "src": "/images/portfolio/dva-cvetovyh-resheniya-4.webp",
-        "alt": "Два цветовых решения — зелёная палитра, ракурс 4",
-        "caption": "Зелёная палитра, ракурс 4"
+        "alt": "Два цветовых решения — зелёная палитра — постирочная зона",
+        "caption": "Зелёная палитра — постирочная зона"
+      },
+      {
+        "src": "/images/portfolio/dva-cvetovyh-resheniya-3.webp",
+        "alt": "Два цветовых решения — зелёная палитра — душевая",
+        "caption": "Зелёная палитра — душевая"
       },
       {
         "src": "/images/portfolio/dva-cvetovyh-resheniya-5.webp",
-        "alt": "Два цветовых решения — красная палитра",
-        "caption": "Красная палитра"
+        "alt": "Два цветовых решения — красная палитра — гостиная",
+        "caption": "Красная палитра — гостиная"
       },
       {
         "src": "/images/portfolio/dva-cvetovyh-resheniya-6.webp",
-        "alt": "Два цветовых решения — красная палитра, ракурс 2",
-        "caption": "Красная палитра, ракурс 2"
-      },
-      {
-        "src": "/images/portfolio/dva-cvetovyh-resheniya-7.webp",
-        "alt": "Два цветовых решения — красная палитра, ракурс 3",
-        "caption": "Красная палитра, ракурс 3"
+        "alt": "Два цветовых решения — красная палитра — кухня и столовая",
+        "caption": "Красная палитра — кухня и столовая"
       },
       {
         "src": "/images/portfolio/dva-cvetovyh-resheniya-8.webp",
-        "alt": "Два цветовых решения — красная палитра, ракурс 4",
-        "caption": "Красная палитра, ракурс 4"
+        "alt": "Два цветовых решения — красная палитра — прихожая",
+        "caption": "Красная палитра — прихожая"
+      },
+      {
+        "src": "/images/portfolio/dva-cvetovyh-resheniya-7.webp",
+        "alt": "Два цветовых решения — красная палитра — душевая",
+        "caption": "Красная палитра — душевая"
       }
     ],
     "sections": [

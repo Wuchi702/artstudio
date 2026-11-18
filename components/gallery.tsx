@@ -31,11 +31,11 @@ export function Gallery({ photos, title, coverSrc }: { photos: Photo[]; title: s
   }
 
   return <>
-    <div className={`gallery-grid ${previews.length === 2 ? 'gallery-grid-pair' : ''}`}>
-      {previews.map(({ item, at }, previewIndex) => <figure key={`${item.src}-${at}`}>
+    <div className="gallery-grid">
+      {previews.map(({ item, at }) => <figure key={`${item.src}-${at}`}>
         <button type="button" className="gallery-trigger" onClick={(event) => open(at, event.currentTarget)}
           aria-label={`Открыть изображение ${at + 1}: ${item.alt}`}>
-          <PhotoFrame photo={item} sizes={previewIndex === 0 && previews.length !== 2 ? '(max-width: 720px) 92vw, 88vw' : '(max-width: 720px) 92vw, 44vw'} />
+          <PhotoFrame photo={item} sizes="(max-width: 720px) 92vw, (max-width: 1216px) 44vw, 500px" />
           <span className="gallery-expand"><Arrow /></span>
         </button>
         {item.caption && <figcaption>{item.caption}</figcaption>}

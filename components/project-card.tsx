@@ -8,7 +8,7 @@ export function ProjectCard({ project, index, heading: Heading = 'h3' }: { proje
   return <article className={`project-card project-card-${project.layout ?? 'landscape'}`} data-reveal>
     <Link href={projectPath(project)} className="project-card-link">
       {project.cover && <div className="project-visual"><PhotoFrame photo={project.cover} className="project-card-photo"
-        sizes={project.layout === 'wide' ? '(max-width: 720px) 100vw, 60vw' : '(max-width: 720px) 100vw, 42vw'} />
+        sizes={Heading === 'h2' ? '(max-width: 720px) 92vw, (max-width: 1216px) 44vw, 500px' : project.layout === 'wide' ? '(max-width: 720px) 100vw, 60vw' : '(max-width: 720px) 100vw, 42vw'} />
         <span className="project-hover" aria-hidden="true">Смотреть проект <Arrow /></span>
       </div>}
       <div className="project-card-caption">
