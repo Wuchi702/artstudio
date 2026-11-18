@@ -6,8 +6,8 @@ import { imagery } from '@/data/projects';
 export function HeroImage() {
   const portrait = site.designer.portrait;
   if (portrait) {
-    return <div className="photo-frame hero-image hero-portrait" data-hero-image>
-      <Image src={assetPath(portrait.src)} alt={portrait.alt} fill sizes="(max-width: 720px) 100vw, 61vw" quality={85}
+    return <div className="photo-frame hero-portrait" data-hero-image>
+      <Image src={assetPath(portrait.src)} alt={portrait.alt} fill sizes="(max-width: 720px) 94vw, 40vw" quality={85}
         fetchPriority="high" loading="eager" style={{ objectPosition: portrait.position }} />
     </div>;
   }

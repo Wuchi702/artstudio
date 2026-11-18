@@ -44,7 +44,7 @@ export function Motion() {
         }
 
         const heroPhoto = hero?.querySelector('[data-hero-image] img');
-        if (wide && scroll && hero && heroPhoto) {
+        if (wide && scroll && hero && heroPhoto && !hero.classList.contains('home-hero-portrait')) {
           gsap.to(heroPhoto, { yPercent: 3, scale: 1.065, ease: 'none',
             scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
         }

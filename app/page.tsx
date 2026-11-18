@@ -11,26 +11,44 @@ export const metadata = pageMetadata('/', `${site.name} — Дизайнер и�
 export default function Home() {
   const selected = projects.filter((project) => project.featured);
   return <>
-    <section className={site.designer.portrait ? "home-hero home-hero-portrait" : "home-hero"} aria-labelledby="hero-title">
-      <HeroImage />
-      <div className="shell hero-wrap">
-        <div className="hero-content">
-          <p className="eyebrow hero-kicker" data-hero-meta><i aria-hidden="true" />{site.designer.name ? `${site.designer.name} / ` : ''}Дизайнер интерьера</p>
-          <h1 id="hero-title">
-            <span className="hero-line"><span data-hero-line>Интерьеры</span></span>
-            <span className="hero-line"><span data-hero-line>с характером<span className="hero-dot">.</span></span></span>
-          </h1>
-          <p className="hero-description" data-hero-meta>Планировка, материалы и свет для повседневной жизни.</p>
-          <Link href="#work" className="hero-cta" data-hero-meta>Смотреть работы<Arrow direction="down" /></Link>
+    {site.designer.portrait ? (
+      <section className="home-hero home-hero-portrait" aria-labelledby="hero-title">
+        <div className="shell portrait-hero-grid">
+          <HeroImage />
+          <div className="portrait-hero-copy">
+            <p className="portrait-hero-role" data-hero-meta>{site.designer.name || 'Дизайнер интерьера'}</p>
+            <h1 id="hero-title">
+              <span className="hero-line"><span data-hero-line>Интерьеры</span></span>
+              <span className="hero-line"><span data-hero-line>для жизни.</span></span>
+            </h1>
+            <p className="portrait-hero-description" data-hero-meta>Проектирую жилые пространства от планировки до материалов и света.</p>
+            <div className="portrait-hero-links" data-hero-meta>
+              <a href="#work" className="portrait-work-link">Смотреть проекты <Arrow direction="down" /></a>
+              <TextLink href="/about">Обо мне</TextLink>
+            </div>
+          </div>
         </div>
-        <div className="hero-caption" data-hero-meta>
-          <a href="#work" className="down-link" aria-label="Перейти к проектам"><Arrow direction="down" /></a>
-          {site.designer.portrait
-            ? <Link href="/about"><span>{site.designer.name || 'Об авторе'}</span><span>Познакомиться <Arrow /></span></Link>
-            : <Link href="/projects/v-storonu-sada"><span>В сторону сада</span><span>Интерьерная концепция <Arrow /></span></Link>}
+      </section>
+    ) : (
+      <section className="home-hero" aria-labelledby="hero-title">
+        <HeroImage />
+        <div className="shell hero-wrap">
+          <div className="hero-content">
+            <p className="eyebrow hero-kicker" data-hero-meta><i aria-hidden="true" />{site.designer.name ? `${site.designer.name} / ` : ''}Дизайнер интерьера</p>
+            <h1 id="hero-title">
+              <span className="hero-line"><span data-hero-line>Интерьеры</span></span>
+              <span className="hero-line"><span data-hero-line>с характером<span className="hero-dot">.</span></span></span>
+            </h1>
+            <p className="hero-description" data-hero-meta>Планировка, материалы и свет для повседневной жизни.</p>
+            <Link href="#work" className="hero-cta" data-hero-meta>Смотреть работы<Arrow direction="down" /></Link>
+          </div>
+          <div className="hero-caption" data-hero-meta>
+            <a href="#work" className="down-link" aria-label="Перейти к проектам"><Arrow direction="down" /></a>
+            <Link href="/projects/v-storonu-sada"><span>В сторону сада</span><span>Интерьерная концепция <Arrow /></span></Link>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    )}
 
     {selected.length > 0 && <section className="shell selected" id="work" aria-labelledby="selected-title">
       <div className="section-heading">
