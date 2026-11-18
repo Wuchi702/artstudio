@@ -52,22 +52,31 @@ export function ServiceList({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    function openLinkedService() {
+    let disposed = false;
+
+    async function openLinkedService() {
       const id = window.location.hash.slice(1);
       if (!id) return;
+
+      // Heading heights can change when the display font replaces its fallback.
+      await document.fonts.ready;
+      if (disposed || window.location.hash !== `#${id}`) return;
       const target = document.getElementById(`service-${id}`);
       const summary = target?.querySelector('summary');
       if (!(target instanceof HTMLDetailsElement) || !list.current?.contains(target) || !summary) return;
 
       setExpanded(target, true);
       summary.focus({ preventScroll: true });
-      summary.scrollIntoView({ behavior: prefersReducedMotion() ? 'instant' : 'smooth', block: 'start' });
+      const margin = parseFloat(getComputedStyle(summary).scrollMarginTop) || 0;
+      const top = window.scrollY + summary.getBoundingClientRect().top - margin;
+      window.scrollTo({ top, behavior: prefersReducedMotion() ? 'instant' : 'smooth' });
     }
 
     const active = animations.current;
-    openLinkedService();
+    void openLinkedService();
     window.addEventListener('hashchange', openLinkedService);
     return () => {
+      disposed = true;
       window.removeEventListener('hashchange', openLinkedService);
       for (const animation of active.values()) animation.progress(1);
       active.clear();
