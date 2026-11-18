@@ -171,3 +171,13 @@ h1,h2,h3 { font-family: var(--display); font-weight: 500; letter-spacing: -.035e
 @media (max-width: 380px) {
   .service-item summary .service-toggle { grid-column: 1 / -1; }
 }
+
+
+@media (prefers-reduced-motion: no-preference) {
+  .service-toggle-chevron { transition: transform 220ms var(--ease); }
+  .service-item[open] > .service-details { animation: service-details-in 260ms var(--ease) both; }
+}
+@keyframes service-details-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
