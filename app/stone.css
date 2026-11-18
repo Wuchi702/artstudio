@@ -223,3 +223,14 @@ h1,h2,h3 { font-family: var(--display); font-weight: 500; letter-spacing: -.035e
   .archive-grid { grid-template-columns: minmax(0, 1fr); }
   .project-grid.archive-grid > .project-card { grid-column: 1; }
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  .project-card-link[data-opening="true"] {
+    animation: project-card-open 180ms ease-out both;
+  }
+}
+
+@keyframes project-card-open {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: .65; transform: scale(.985); }
+}

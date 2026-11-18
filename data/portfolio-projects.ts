@@ -4,39 +4,39 @@ export const portfolioProjects = [
   {
     "id": "kuhnya-gostinaya-i-spalnya",
     "slug": "kuhnya-gostinaya-i-spalnya",
-    "title": "Кухня-гостиная и спальня",
+    "title": "Интерьер в графитовых тонах",
     "status": "visualization",
     "featured": true,
     "layout": "wide",
     "cover": {
       "src": "/images/portfolio/kuhnya-gostinaya-i-spalnya-1.webp",
-      "alt": "Кухня-гостиная и спальня — кухня-гостиная",
+      "alt": "Интерьер в графитовых тонах — кухня-гостиная",
       "caption": "Кухня-гостиная"
     },
     "gallery": [
       {
         "src": "/images/portfolio/kuhnya-gostinaya-i-spalnya-1.webp",
-        "alt": "Кухня-гостиная и спальня — кухня-гостиная",
+        "alt": "Интерьер в графитовых тонах — кухня-гостиная",
         "caption": "Кухня-гостиная"
       },
       {
         "src": "/images/portfolio/kuhnya-gostinaya-i-spalnya-2.webp",
-        "alt": "Кухня-гостиная и спальня — кухня-гостиная, другой ракурс",
+        "alt": "Интерьер в графитовых тонах — кухня-гостиная, другой ракурс",
         "caption": "Кухня-гостиная, другой ракурс"
       },
       {
         "src": "/images/portfolio/kuhnya-gostinaya-i-spalnya-5.webp",
-        "alt": "Кухня-гостиная и спальня — спальня",
+        "alt": "Интерьер в графитовых тонах — спальня",
         "caption": "Спальня"
       },
       {
         "src": "/images/portfolio/kuhnya-gostinaya-i-spalnya-3.webp",
-        "alt": "Кухня-гостиная и спальня — прихожая",
+        "alt": "Интерьер в графитовых тонах — прихожая",
         "caption": "Прихожая"
       },
       {
         "src": "/images/portfolio/kuhnya-gostinaya-i-spalnya-4.webp",
-        "alt": "Кухня-гостиная и спальня — санузел",
+        "alt": "Интерьер в графитовых тонах — санузел",
         "caption": "Санузел"
       }
     ],
@@ -47,39 +47,39 @@ export const portfolioProjects = [
   {
     "id": "gostinaya-i-kuhnya",
     "slug": "gostinaya-i-kuhnya",
-    "title": "Гостиная и кухня",
+    "title": "Интерьер в тёплых тонах",
     "status": "visualization",
     "featured": true,
     "layout": "landscape",
     "cover": {
       "src": "/images/portfolio/gostinaya-i-kuhnya-1.webp",
-      "alt": "Гостиная и кухня — гостиная",
+      "alt": "Интерьер в тёплых тонах — гостиная",
       "caption": "Гостиная"
     },
     "gallery": [
       {
         "src": "/images/portfolio/gostinaya-i-kuhnya-1.webp",
-        "alt": "Гостиная и кухня — гостиная",
+        "alt": "Интерьер в тёплых тонах — гостиная",
         "caption": "Гостиная"
       },
       {
         "src": "/images/portfolio/gostinaya-i-kuhnya-2.webp",
-        "alt": "Гостиная и кухня — кухня",
+        "alt": "Интерьер в тёплых тонах — кухня",
         "caption": "Кухня"
       },
       {
         "src": "/images/portfolio/gostinaya-i-kuhnya-4.webp",
-        "alt": "Гостиная и кухня — спальня",
+        "alt": "Интерьер в тёплых тонах — спальня",
         "caption": "Спальня"
       },
       {
         "src": "/images/portfolio/gostinaya-i-kuhnya-3.webp",
-        "alt": "Гостиная и кухня — прихожая",
+        "alt": "Интерьер в тёплых тонах — прихожая",
         "caption": "Прихожая"
       },
       {
         "src": "/images/portfolio/gostinaya-i-kuhnya-5.webp",
-        "alt": "Гостиная и кухня — ванная",
+        "alt": "Интерьер в тёплых тонах — ванная",
         "caption": "Ванная"
       }
     ],
