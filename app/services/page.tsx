@@ -22,7 +22,6 @@ export default function ServicesPage() {
             <span className="service-title">{service.title}</span>
             <span className="service-description">{service.description}</span>
           </span>
-          <span className="service-price">{service.price}</span>
           <span className="service-toggle">
             <span className="service-toggle-closed">Состав и оплата</span>
             <span className="service-toggle-open">Свернуть</span>
@@ -41,6 +40,7 @@ export default function ServicesPage() {
               </ol>
             </div>
             <div className="service-payment">
+              <p className="service-cost">Стоимость <strong className="service-price">{service.price}</strong></p>
               <h2>Порядок оплаты</h2>
               <ul>{service.payment.map((item) => <li key={item}>{item}</li>)}</ul>
               <TextLink href={`/contact?service=${service.id}`}>Обсудить услугу</TextLink>

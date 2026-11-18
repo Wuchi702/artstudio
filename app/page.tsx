@@ -12,8 +12,7 @@ import { pageMetadata } from '@/lib/metadata';
 const cover = imagery.light;
 export const metadata = pageMetadata('/', 'Дизайн интерьера', site.description, cover);
 
-const designPackages = services.filter(({ id, available }) => available && (id === 'design' || id === 'turnkey'));
-const standaloneServices = services.filter(({ id, available }) => available && (id === 'planning' || id === 'home-staging'));
+const homeServices = services.filter(({ id, available }) => available && ['design', 'planning', 'home-staging'].includes(id));
 const homeProjects = projects.filter(({ featured }) => featured);
 const icons: Record<string, string> = {
   design: 'M3 11l9-7 9 7M5 10v10h14V10M10 20v-6h4v6',
@@ -46,33 +45,17 @@ export default async function Home() {
         <TextLink href="/services">Все услуги</TextLink>
       </div>
       <div className="studio-service-grid">
-        {designPackages.length > 0 && <article className="studio-service-card studio-service-options">
-          <div className="studio-service-heading">
-            <ServiceIcon name="design" />
-            <h3>Дизайн интерьера</h3>
-          </div>
-          <ul aria-label="Варианты дизайн-проекта">
-            {designPackages.map(({ id, title, price }) => <li key={id}>
-              <Link href={`/services#${id}`}>
-                <span>{title}</span>
-                <span className="service-option-price"><strong className="service-price">{price}</strong><Arrow /></span>
-              </Link>
-            </li>)}
-          </ul>
-        </article>}
-        {standaloneServices.map(({ id, title, description, price }) =>
-          <Link href={`/services#${id}`} key={id} className="studio-service-card" data-service={id}>
+        {homeServices.map(({ id, title, description }) => {
+          const isDesign = id === 'design';
+          return <Link href={`/services#${id}`} key={id} className="studio-service-card" data-service={id}>
             <div className="studio-service-heading">
               <ServiceIcon name={id} />
-              <h3>{title}</h3>
+              <h3>{isDesign ? 'Дизайн интерьера' : title}</h3>
             </div>
-            <p>{description}</p>
-            <div className="studio-service-footer">
-              <strong className="service-price">{price}</strong>
-              <span className="studio-service-more">Подробнее <Arrow /></span>
-            </div>
-          </Link>
-        )}
+            <p>{isDesign ? 'Планировка, визуализация и рабочие чертежи для ремонта.' : description}</p>
+            <span className="studio-service-more">Подробнее <Arrow /></span>
+          </Link>;
+        })}
       </div>
     </section>
     <section className="studio-projects" id="work" aria-labelledby="projects-title">
