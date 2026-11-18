@@ -129,9 +129,45 @@ h1,h2,h3 { font-family: var(--display); font-weight: 500; letter-spacing: -.035e
 @media (max-width: 720px) {
   .service-item summary { display: grid; grid-template-columns: minmax(0, 1fr) auto; }
   .service-item summary .service-price { grid-column: 1; }
-  .service-item summary .disclosure-mark { grid-column: 2; grid-row: 1 / 3; }
+
   .service-details { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 470px) {
   .studio-service-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+
+.service-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 1px solid var(--rule);
+  border-radius: 100px;
+  color: var(--coffee);
+  font-size: .85rem;
+  font-weight: 650;
+}
+.service-item summary:hover .service-toggle,
+.service-item[open] .service-toggle { background: var(--surface); }
+.service-toggle-chevron {
+  width: 7px;
+  height: 7px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+}
+.service-item[open] .service-toggle-chevron { transform: translateY(2px) rotate(225deg); }
+.service-item:not([open]) .service-toggle-open,
+.service-item[open] .service-toggle-closed { display: none; }
+.service-details { scroll-margin-top: 18px; }
+@media (max-width: 720px) {
+  .service-item summary { gap: 8px 12px; }
+  .service-item summary .service-title { grid-column: 1 / -1; }
+  .service-item summary .service-toggle { justify-self: start; }
+}
+@media (max-width: 380px) {
+  .service-item summary .service-toggle { grid-column: 1 / -1; }
 }

@@ -1,16 +1,12 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
 export function Motion() {
   const pathname = usePathname();
-  const previous = useRef(pathname);
-  const curtain = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const changed = previous.current !== pathname;
-    previous.current = pathname;
     const main = document.querySelector('main');
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
     if (!main || reduced.matches) return;
@@ -20,7 +16,7 @@ export function Motion() {
     const wide = window.matchMedia('(min-width: 721px)').matches;
     const hero = main.querySelector('.home-hero');
     const reveals = wide ? Array.from(main.querySelectorAll('[data-reveal],[data-copy-reveal]')) : [];
-    if (!changed && !hero && reveals.length === 0) {
+    if (!hero && reveals.length === 0) {
       return;
     }
     const plugin = reveals.length ? import('gsap/ScrollTrigger') : Promise.resolve(undefined);
@@ -30,11 +26,6 @@ export function Motion() {
       if (scroll) gsap.registerPlugin(scroll.ScrollTrigger);
 
       const scope = gsap.context(() => {
-        if (changed && curtain.current) {
-          gsap.fromTo(curtain.current, { yPercent: 0, autoAlpha: 1 },
-            { yPercent: -101, duration: 0.48, ease: 'power3.inOut', clearProps: 'transform,opacity,visibility' });
-        }
-
         if (hero) {
           gsap.timeline({ defaults: { ease: 'power3.out', clearProps: 'transform,opacity,clipPath' } })
             .from(hero.querySelector('[data-hero-image]'), { clipPath: 'inset(3% 4% 6% 4% round 22px)', duration: wide ? 0.85 : 0.55 }, 0)
@@ -77,5 +68,5 @@ export function Motion() {
     };
   }, [pathname]);
 
-  return <div ref={curtain} className="route-curtain" aria-hidden="true" />;
+  return null;
 }

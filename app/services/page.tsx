@@ -12,13 +12,17 @@ export default function ServicesPage() {
     <PageLead title={title} text="Работаю по договору. Стоимость и сроки фиксирую до начала проектирования. Возможна поэтапная оплата." />
     <section className="shell services-list" aria-label="Форматы дизайн-работы">
       {offers.length === 0 && <p className="services-note">Список услуг будет дополнен после подтверждения форматов работы.</p>}
-      {offers.map((service, index) => <details className="service-item" key={service.id} id={service.id} open={index === 0 ? true : undefined}>
+      {offers.map((service) => <details className="service-item" key={service.id}>
         <summary>
           <span className="service-title">{service.title}</span>
           <span className="service-price">{service.price}</span>
-          <span className="disclosure-mark" aria-hidden="true" />
+          <span className="service-toggle">
+            <span className="service-toggle-closed">Состав и оплата</span>
+            <span className="service-toggle-open">Свернуть</span>
+            <span className="service-toggle-chevron" aria-hidden="true" />
+          </span>
         </summary>
-        <div className="service-body service-details">
+        <div className="service-body service-details" id={service.id}>
           <p className="body-copy">{service.description}</p>
           <div>
             <h2>Что входит в услугу</h2>
