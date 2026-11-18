@@ -22,21 +22,25 @@ export default function ServicesPage() {
             <span className="service-toggle-chevron" aria-hidden="true" />
           </span>
         </summary>
-        <div className="service-body service-details" id={service.id}>
-          <p className="body-copy">{service.description}</p>
-          <div>
-            <h2>Что входит в услугу</h2>
-            <ol className="service-scope">
-              {service.scope.map(({ title, items }) => <li key={title}>
-                <h3>{title}</h3>
-                <ul>{items.map((item) => <li key={item}>{item}</li>)}</ul>
-              </li>)}
-            </ol>
-          </div>
-          <div className="service-payment">
-            <h2>Порядок оплаты</h2>
-            <ul>{service.payment.map((item) => <li key={item}>{item}</li>)}</ul>
-            <TextLink href={`/contact?service=${service.id}`}>Обсудить услугу</TextLink>
+        <div className="service-panel" id={service.id}>
+          <div className="service-panel-clip">
+            <div className="service-body service-details">
+              <p className="body-copy">{service.description}</p>
+              <div>
+                <h2>Что входит в услугу</h2>
+                <ol className="service-scope">
+                  {service.scope.map(({ title, items }) => <li key={title}>
+                    <h3>{title}</h3>
+                    <ul>{items.map((item) => <li key={item}>{item}</li>)}</ul>
+                  </li>)}
+                </ol>
+              </div>
+              <div className="service-payment">
+                <h2>Порядок оплаты</h2>
+                <ul>{service.payment.map((item) => <li key={item}>{item}</li>)}</ul>
+                <TextLink href={`/contact?service=${service.id}`}>Обсудить услугу</TextLink>
+              </div>
+            </div>
           </div>
         </div>
       </details>)}
