@@ -6,6 +6,8 @@ export type Photo = {
   alt: string;
   position?: string;
   caption?: string;
+  group?: string;
+  widths?: readonly number[];
 };
 
 export type Project = {
@@ -34,7 +36,7 @@ export type Project = {
 
 export const imagery = {
   hero: { src: '/images/hero.webp', alt: 'Льняной диван у широкого окна, на полу полосы вечернего света', position: '66% center' },
-  light: { src: '/images/light.webp', alt: 'Светлая гостиная с низким ореховым столом и окном в сад', caption: 'Гостиная и вечерний свет' },
+  light: { src: '/images/light.webp', alt: 'Светлая гостиная с низким ореховым столом и окном в сад', widths: [480, 800, 1120, 1536], caption: 'Гостиная и вечерний свет' },
   oak: { src: '/images/oak.webp', alt: 'Круглый дубовый стол и плетёные стулья у окна', caption: 'Дубовая столовая' },
   garden: { src: '/images/garden.webp', alt: 'Гостиная с открытым остеклением и выходом в сад', caption: 'Гостиная, открытая саду' },
   detail: { src: '/images/detail.webp', alt: 'Тёмная керамика и ветка на плите травертина', caption: 'Керамика, травертин и известковая штукатурка' },

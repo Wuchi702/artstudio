@@ -1,5 +1,6 @@
 import { editorial } from '@/data/editorial';
 import { Endnote, PageLead, TextLink } from '@/components/ui';
+import { ServiceList } from '@/components/service-list';
 import { services } from '@/data/site';
 import { pageMetadata } from '@/lib/metadata';
 
@@ -10,9 +11,9 @@ export default function ServicesPage() {
   const offers = services.filter(({ available }) => available);
   return <>
     <PageLead title={title} text="Работаю по договору. Стоимость и сроки фиксирую до начала проектирования. Возможна поэтапная оплата." />
-    <section className="shell services-list" aria-label="Форматы дизайн-работы">
+    <ServiceList>
       {offers.length === 0 && <p className="services-note">Список услуг будет дополнен после подтверждения форматов работы.</p>}
-      {offers.map((service) => <details className="service-item" key={service.id}>
+      {offers.map((service) => <details className="service-item" id={service.id} key={service.id}>
         <summary>
           <span className="service-title">{service.title}</span>
           <span className="service-price">{service.price}</span>
@@ -22,7 +23,7 @@ export default function ServicesPage() {
             <span className="service-toggle-chevron" aria-hidden="true" />
           </span>
         </summary>
-        <div className="service-panel" id={service.id}>
+        <div className="service-panel">
           <div className="service-panel-clip">
             <div className="service-body service-details">
               <p className="body-copy">{service.description}</p>
@@ -44,7 +45,7 @@ export default function ServicesPage() {
           </div>
         </div>
       </details>)}
-    </section>
+    </ServiceList>
     <Endnote title="Расскажите, что хотите изменить." />
   </>;
 }

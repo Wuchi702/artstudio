@@ -12,13 +12,20 @@ import { pageMetadata } from '@/lib/metadata';
 const cover = imagery.light;
 export const metadata = pageMetadata('/', 'Дизайн интерьера', site.description, cover);
 
-const scopes = ['design', 'turnkey', 'planning', 'home-staging'];
-const icons = [
-  'M3 11l9-7 9 7M5 10v10h14V10M10 20v-6h4v6',
-  'M3 11l9-7 9 7M5 10v10h14V10M9 15h6M9 12h6',
-  'M4 4h16v16H4zM10 4v9h10M4 15h6v5',
-  'M5 12V8a2 2 0 012-2h10a2 2 0 012 2v4M5 17h14M5 19v-2m14 2v-2M5 17H3v-5h4v2h10v-2h4v5h-2'
-];
+const designPackages = services.filter(({ id, available }) => available && (id === 'design' || id === 'turnkey'));
+const standaloneServices = services.filter(({ id, available }) => available && (id === 'planning' || id === 'home-staging'));
+const homeProjects = projects.filter(({ featured }) => featured);
+const icons: Record<string, string> = {
+  design: 'M3 11l9-7 9 7M5 10v10h14V10M10 20v-6h4v6',
+  planning: 'M4 4h16v16H4zM10 4v9h10M4 15h6v5',
+  'home-staging': 'M5 12V8a2 2 0 012-2h10a2 2 0 012 2v4M5 17h14M5 19v-2m14 2v-2M5 17H3v-5h4v2h10v-2h4v5h-2'
+};
+
+function ServiceIcon({ name }: { name: string }) {
+  return <svg aria-hidden="true" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth=".8">
+    <path d={icons[name]} />
+  </svg>;
+}
 
 export default async function Home() {
   const isStatic = process.env.GITHUB_PAGES === '1';
@@ -29,28 +36,37 @@ export default async function Home() {
       <h1 id="hero-title">{site.name}</h1>
       <p>Дизайн интерьера: от планировки до реализации</p>
       <figure>
-        <PhotoFrame photo={cover} sizes="(max-width: 720px) 96vw, 78vw" priority />
+        <PhotoFrame photo={cover} sizes="(max-width: 720px) 94vw, (max-width: 1216px) 84vw, 1012px" priority />
         <figcaption>Концепция · интерьерная визуализация</figcaption>
       </figure>
     </section>
     <section className="studio-services" aria-labelledby="services-title">
       <h2 id="services-title">Услуги</h2>
       <div className="studio-service-grid">
-        {scopes.map((id, index) => {
-          const service = services.find((item) => item.id === id);
-          if (!service) return null;
-          return <Link href={`/services#${id}`} key={id} className="studio-service-card" data-reveal>
-            <svg aria-hidden="true" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth=".8"><path d={icons[index]} /></svg>
-            <h3>{service.title}</h3><p>{service.description}</p><strong className="service-price">{service.price}</strong>
-          </Link>;
-        })}
+        {designPackages.length > 0 && <article className="studio-service-card studio-service-options">
+          <ServiceIcon name="design" />
+          <h3>Дизайн интерьера</h3>
+          <ul aria-label="Варианты дизайн-проекта">
+            {designPackages.map(({ id, title, price }) => <li key={id}>
+              <Link href={`/services#${id}`}>
+                <span>{title}</span>
+                <span className="service-option-price"><strong className="service-price">{price}</strong><Arrow /></span>
+              </Link>
+            </li>)}
+          </ul>
+        </article>}
+        {standaloneServices.map(({ id, title, description, price }) =>
+          <Link href={`/services#${id}`} key={id} className="studio-service-card" data-service={id} data-reveal>
+            <ServiceIcon name={id} />
+            <h3>{title}</h3><p>{description}</p><strong className="service-price">{price}</strong>
+          </Link>
+        )}
       </div>
-      {scopes.some((id) => !services.find((item) => item.id === id)?.available) && <p className="studio-services-note">Состав и доступность работ уточняются при обсуждении проекта.</p>}
     </section>
     <section className="studio-projects" id="work" aria-labelledby="projects-title">
-      <h2 id="projects-title">Избранные проекты</h2>
+      <h2 id="projects-title">Портфолио</h2>
       <div className="studio-project-grid">
-        {projects.slice(0, 5).map((project, index) => <ProjectCard key={project.id} project={project} index={index} />)}
+        {homeProjects.map((project, index) => <ProjectCard key={project.id} project={project} index={index} />)}
       </div>
     </section>
     <div className="studio-bottom">

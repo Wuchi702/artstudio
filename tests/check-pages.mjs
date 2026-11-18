@@ -25,14 +25,20 @@ for (const file of expected) {
   const canonical = new URL(`${basePath}/${file.replace(/index\.html$/, '')}`, origin);
   assert.ok(html.includes(`rel="canonical" href="${canonical.href}"`), `Incorrect canonical in ${file}`);
 
-  const attributes = html.matchAll(/<(?:a|img|script|source|link)\b(?!(?:[^>]*\brel="preconnect"))[^>]*?\s(?:href|src|srcset)="([^"]+)"/gi);
-  for (const [, value] of attributes) {
-    if (!value.startsWith('/') || value.startsWith('//')) continue;
-    const url = new URL(value, origin);
-    assert.ok(url.pathname.startsWith(`${basePath}/`), `Missing Pages base path in ${file}: ${value}`);
-    const localPath = decodeURIComponent(url.pathname.slice(basePath.length + 1));
-    const target = url.pathname.endsWith('/') ? join(output, localPath, 'index.html') : join(output, localPath);
-    assert.ok(existsSync(target), `Missing asset or route in ${file}: ${target}`);
+  const tags = html.matchAll(/<(?:a|img|script|source|link)\b(?!(?:[^>]*\brel="preconnect"))[^>]*>/gi);
+  for (const [tag] of tags) {
+    const attributes = tag.matchAll(/\s(href|src|(?:image)?srcset)="([^"]+)"/gi);
+    for (const [, name, value] of attributes) {
+      const urls = /srcset$/i.test(name) ? value.split(',').map((entry) => entry.trim().split(/\s+/)[0]) : [value];
+      for (const path of urls) {
+        if (!path.startsWith('/') || path.startsWith('//')) continue;
+        const url = new URL(path, origin);
+        assert.ok(url.pathname.startsWith(`${basePath}/`), `Missing Pages base path in ${file}: ${path}`);
+        const localPath = decodeURIComponent(url.pathname.slice(basePath.length + 1));
+        const target = url.pathname.endsWith('/') ? join(output, localPath, 'index.html') : join(output, localPath);
+        assert.ok(existsSync(target), `Missing asset or route in ${file}: ${target}`);
+      }
+    }
   }
 }
 

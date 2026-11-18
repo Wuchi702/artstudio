@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { preload } from 'react-dom';
 import type { Photo } from '@/data/projects';
 import { assetPath } from '@/lib/asset-path';
 import { site } from '@/data/site';
@@ -20,9 +21,22 @@ export function Wordmark() {
 export function PhotoFrame({ photo, className = '', sizes, priority = false }: {
   photo: Photo; className?: string; sizes: string; priority?: boolean;
 }) {
+  const src = assetPath(photo.src);
+  const srcSet = photo.widths?.map((width, index, widths) => {
+    const file = index === widths.length - 1 ? src : src.replace(/\.webp$/, `-${width}.webp`);
+    return `${file} ${width}w`;
+  }).join(', ');
+
+  if (priority && srcSet) {
+    preload(src, { as: 'image', imageSrcSet: srcSet, imageSizes: sizes, fetchPriority: 'high' });
+  }
+
+  const image = <Image src={src} alt={photo.alt} fill sizes={sizes} quality={priority ? 85 : 75}
+    unoptimized={srcSet ? true : undefined} preload={priority && !srcSet}
+    loading={priority && srcSet ? 'eager' : undefined} style={{ objectPosition: photo.position }} />;
+
   return <span className={`photo-frame ${className}`}>
-    <Image src={assetPath(photo.src)} alt={photo.alt} fill sizes={sizes} quality={priority ? 85 : 75}
-      preload={priority} style={{ objectPosition: photo.position }} />
+    {srcSet ? <picture><source srcSet={srcSet} sizes={sizes} />{image}</picture> : image}
   </span>;
 }
 

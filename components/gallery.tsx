@@ -22,6 +22,14 @@ export function Gallery({ photos, title, coverSrc }: { photos: Photo[]; title: s
   const supplementary = entries.filter(({ item }) => item.src !== coverSrc);
   const previews = supplementary.length ? supplementary : entries;
 
+  const groups = new Map<string, typeof previews>();
+  for (const preview of previews) {
+    const name = preview.item.group ?? '';
+    const group = groups.get(name);
+    if (group) group.push(preview);
+    else groups.set(name, [preview]);
+  }
+
   function open(at: number, button: HTMLButtonElement) {
     openingButton.current = button;
     setIndex(at);
@@ -31,15 +39,20 @@ export function Gallery({ photos, title, coverSrc }: { photos: Photo[]; title: s
   }
 
   return <>
-    <div className="gallery-grid">
-      {previews.map(({ item, at }) => <figure key={`${item.src}-${at}`}>
-        <button type="button" className="gallery-trigger" onClick={(event) => open(at, event.currentTarget)}
-          aria-label={`Открыть изображение ${at + 1}: ${item.alt}`}>
-          <PhotoFrame photo={item} sizes="(max-width: 720px) 92vw, (max-width: 1216px) 44vw, 500px" />
-          <span className="gallery-expand"><Arrow /></span>
-        </button>
-        {item.caption && <figcaption>{item.caption}</figcaption>}
-      </figure>)}
+    <div className="gallery-rooms">
+      {Array.from(groups, ([name, frames]) => <div className="gallery-room" key={name}>
+        {name && groups.size > 1 && <h3>{name}</h3>}
+        <div className="gallery-grid">
+          {frames.map(({ item, at }) => <figure key={`${item.src}-${at}`}>
+            <button type="button" className="gallery-trigger" onClick={(event) => open(at, event.currentTarget)}
+              aria-label={`Открыть изображение ${at + 1}: ${item.alt}`}>
+              <PhotoFrame photo={item} sizes="(max-width: 720px) 92vw, (max-width: 1216px) 44vw, 500px" />
+              <span className="gallery-expand"><Arrow /></span>
+            </button>
+            {item.caption && <figcaption>{item.caption}</figcaption>}
+          </figure>)}
+        </div>
+      </div>)}
     </div>
     <dialog ref={dialog} className="lightbox" aria-label={`Галерея проекта «${title}»`} onClose={() => {
       setOpened(false);
