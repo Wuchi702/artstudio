@@ -80,7 +80,7 @@ h1,h2,h3 { font-family: var(--display); font-weight: 500; letter-spacing: -.035e
 .studio-services-note { margin-top: 16px; color: var(--muted); font-size: 14px; }
 .studio-contact .inquiry-form { padding: 0; background: transparent; margin-top: 14px; }
 .studio-contact :is(input,select,textarea),.contact-layout :is(input,select,textarea) { border-radius: 12px; }
-.form-submit,.filter-options button { border-radius: 100px; }
+.form-submit { border-radius: 100px; }
 .site-footer { background: #ead9c8; color: var(--ink); border-radius: 0 0 34px 34px; }
 .footer-caption { color: var(--muted); }
 .footer-inner nav a:hover { color: var(--coffee); }

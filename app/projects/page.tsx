@@ -1,7 +1,6 @@
 import { editorial } from '@/data/editorial';
-import { Suspense } from 'react';
 import { Endnote, PageLead } from '@/components/ui';
-import { ProjectGrid, ProjectIndex } from '@/components/project-index';
+import { ProjectCard } from '@/components/project-card';
 import { projects } from '@/data/projects';
 import { pageMetadata } from '@/lib/metadata';
 
@@ -11,9 +10,9 @@ export default function ProjectsPage() {
   return <>
     <PageLead title="Проекты" text={'Интерьерные визуализации из портфолио автора.'} />
     <section className="shell archive" aria-label="Портфолио">
-      <Suspense fallback={<ProjectGrid projects={projects} />}>
-        <ProjectIndex projects={projects} />
-      </Suspense>
+      <div className="project-grid archive-grid">
+        {projects.map((project, index) => <ProjectCard key={project.id} project={project} index={index} heading="h2" />)}
+      </div>
     </section>
     <Endnote />
   </>;
