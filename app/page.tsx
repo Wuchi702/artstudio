@@ -26,9 +26,9 @@ export default async function Home() {
   const available = !isStatic && !!siteUrl() && !!webhookTarget(process.env.CONTACT_WEBHOOK_URL);
   return <>
     <section className="studio-hero home-hero" aria-labelledby="hero-title">
-      <h1 id="hero-title" data-hero-line>{site.name}</h1>
-      <p data-hero-meta>Дизайн интерьера: от планировки до реализации</p>
-      <figure data-hero-image>
+      <h1 id="hero-title">{site.name}</h1>
+      <p>Дизайн интерьера: от планировки до реализации</p>
+      <figure>
         <PhotoFrame photo={cover} sizes="(max-width: 720px) 96vw, 78vw" priority />
         <figcaption>Концепция · интерьерная визуализация</figcaption>
       </figure>

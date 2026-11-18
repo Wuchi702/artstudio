@@ -14,32 +14,17 @@ export function Motion() {
     let cleanup: (() => void) | undefined;
     const stop = () => cleanup?.();
     const wide = window.matchMedia('(min-width: 721px)').matches;
-    const hero = main.querySelector('.home-hero');
     const reveals = wide ? Array.from(main.querySelectorAll('[data-reveal],[data-copy-reveal]')) : [];
-    if (!hero && reveals.length === 0) {
+    if (reveals.length === 0) {
       return;
     }
-    const plugin = reveals.length ? import('gsap/ScrollTrigger') : Promise.resolve(undefined);
+    const plugin = import('gsap/ScrollTrigger');
 
     void Promise.all([import('gsap'), plugin]).then(([{ gsap }, scroll]) => {
       if (disposed || reduced.matches) return;
-      if (scroll) gsap.registerPlugin(scroll.ScrollTrigger);
+      gsap.registerPlugin(scroll.ScrollTrigger);
 
       const scope = gsap.context(() => {
-        if (hero) {
-          gsap.timeline({ defaults: { ease: 'power3.out', clearProps: 'transform,opacity,clipPath' } })
-            .from(hero.querySelector('[data-hero-image]'), { clipPath: 'inset(3% 4% 6% 4% round 22px)', duration: wide ? 0.85 : 0.55 }, 0)
-            .from(hero.querySelectorAll('[data-hero-line]'), { y: 18, opacity: 0.4, duration: 0.62, stagger: 0.075 }, 0.13)
-            .from(document.querySelector('.header-inner'), { y: -12, opacity: 0.3, duration: 0.42 }, 0.28)
-            .from(hero.querySelectorAll('[data-hero-meta]'), { y: 9, opacity: 0.45, stagger: 0.055, duration: 0.44 }, 0.36);
-        }
-
-        const heroPhoto = hero?.querySelector('[data-hero-image] img');
-        if (wide && scroll && hero && heroPhoto && !hero.classList.contains('studio-hero')) {
-          gsap.to(heroPhoto, { yPercent: 3, scale: 1.065, ease: 'none',
-            scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
-        }
-
         for (const element of reveals) {
           const photo = element.querySelector('.photo-frame');
           const bounds = element.getBoundingClientRect();
