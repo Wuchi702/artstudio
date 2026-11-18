@@ -24,8 +24,10 @@ export function Header() {
     <div className="header-inner shell">
       <Wordmark />
       <nav aria-label="Основная навигация" className="desktop-nav">
+        <Link href="/" aria-current={pathname === '/' ? 'page' : undefined}>Главная</Link>
         {navigation.map(({ label, href }) => <Link key={href} href={href} aria-current={current(href) ? 'page' : undefined}>{label}</Link>)}
       </nav>
+      <Link className="studio-button header-contact" href="/contact">{site.cta}</Link>
       <details ref={menu} className="mobile-menu" onBlur={(event) => {
         if (event.relatedTarget && !event.currentTarget.contains(event.relatedTarget)) close();
       }} onKeyDown={(event) => {

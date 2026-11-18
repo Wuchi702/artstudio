@@ -3,7 +3,10 @@ import type { Metadata } from 'next';
 import '@fontsource-variable/onest';
 import '@fontsource/ibm-plex-mono/cyrillic-500.css';
 import '@fontsource/ibm-plex-mono/latin-500.css';
+import '@fontsource/cormorant-garamond/cyrillic-500.css';
+import '@fontsource/cormorant-garamond/latin-500.css';
 import './globals.css';
+import './stone.css';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { Motion } from '@/components/motion';
@@ -24,9 +27,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return <html lang="ru">
     <body>
       <a className="skip-link" href="#main">К содержанию</a>
+      <div className="studio-panel">
       <Header />
       <main id="main" tabIndex={-1}>{children}</main>
       <Footer />
+      </div>
       <Motion />
       {origin && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         '@context': 'https://schema.org',

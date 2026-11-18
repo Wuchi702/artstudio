@@ -1,82 +1,73 @@
 import Link from 'next/link';
-import { Arrow, Endnote, PhotoFrame, TextLink } from '@/components/ui';
-import { HeroImage } from '@/components/hero-image';
+import { Arrow, PhotoFrame, TextLink } from '@/components/ui';
+import { InquiryForm } from '@/components/inquiry-form';
 import { ProjectCard } from '@/components/project-card';
 import { imagery, projects } from '@/data/projects';
-import { site } from '@/data/site';
+import { services, site } from '@/data/site';
+import { connection } from 'next/server';
+import { webhookTarget } from '@/lib/inquiry';
+import { siteUrl } from '@/lib/site-url';
 import { pageMetadata } from '@/lib/metadata';
 
-export const metadata = pageMetadata('/', `${site.name} — Дизайнер интерьера`, site.description, site.designer.portrait ?? imagery.garden);
+const cover = projects[1]?.cover ?? imagery.garden;
+export const metadata = pageMetadata('/', 'Дизайн интерьера', site.description, cover);
 
-export default function Home() {
-  const selected = projects.filter((project) => project.featured);
+const scopes = ['design', 'planning', 'procurement'];
+const icons = [
+  'M3 11l9-7 9 7M5 10v10h14V10M10 20v-6h4v6',
+  'M4 4h16v16H4zM10 4v9h10M4 15h6v5',
+  'M5 12V8a2 2 0 012-2h10a2 2 0 012 2v4M5 17h14M5 19v-2m14 2v-2M5 17H3v-5h4v2h10v-2h4v5h-2'
+];
+
+export default async function Home() {
+  const isStatic = process.env.GITHUB_PAGES === '1';
+  if (!isStatic) await connection();
+  const available = !isStatic && !!siteUrl() && !!webhookTarget(process.env.CONTACT_WEBHOOK_URL);
   return <>
-    {site.designer.portrait ? (
-      <section className="home-hero home-hero-portrait" aria-labelledby="hero-title">
-        <div className="shell portrait-hero-grid">
-          <HeroImage />
-          <div className="portrait-hero-copy">
-            <p className="portrait-hero-role" data-hero-meta>{site.designer.name || 'Дизайнер интерьера'}</p>
-            <h1 id="hero-title">
-              <span className="hero-line"><span data-hero-line>Интерьеры</span></span>
-              <span className="hero-line"><span data-hero-line>для жизни.</span></span>
-            </h1>
-            <p className="portrait-hero-description" data-hero-meta>Проектирую жилые пространства от планировки до материалов и света.</p>
-            <div className="portrait-hero-links" data-hero-meta>
-              <a href="#work" className="portrait-work-link">Смотреть проекты <Arrow direction="down" /></a>
-              <TextLink href="/about">Обо мне</TextLink>
-            </div>
-          </div>
-        </div>
-      </section>
-    ) : (
-      <section className="home-hero" aria-labelledby="hero-title">
-        <HeroImage />
-        <div className="shell hero-wrap">
-          <div className="hero-content">
-            <p className="eyebrow hero-kicker" data-hero-meta><i aria-hidden="true" />{site.designer.name ? `${site.designer.name} / ` : ''}Дизайнер интерьера</p>
-            <h1 id="hero-title">
-              <span className="hero-line"><span data-hero-line>Интерьеры</span></span>
-              <span className="hero-line"><span data-hero-line>с характером<span className="hero-dot">.</span></span></span>
-            </h1>
-            <p className="hero-description" data-hero-meta>Планировка, материалы и свет для повседневной жизни.</p>
-            <Link href="#work" className="hero-cta" data-hero-meta>Смотреть работы<Arrow direction="down" /></Link>
-          </div>
-          <div className="hero-caption" data-hero-meta>
-            <a href="#work" className="down-link" aria-label="Перейти к проектам"><Arrow direction="down" /></a>
-            <Link href="/projects/v-storonu-sada"><span>В сторону сада</span><span>Интерьерная концепция <Arrow /></span></Link>
-          </div>
-        </div>
-      </section>
-    )}
-
-    {selected.length > 0 && <section className="shell selected" id="work" aria-labelledby="selected-title">
-      <div className="section-heading">
-        <div>
-          <p className="eyebrow"><i aria-hidden="true" /> Портфолио</p>
-          <h2 id="selected-title" data-copy-reveal>Избранное<span className="punctuation">.</span></h2>
-        </div>
-        <TextLink href="/projects">Все проекты</TextLink>
-      </div>
-      <div className="project-grid">
-        {selected.map((project, index) => <ProjectCard key={project.id} project={project} index={index} />)}
-      </div>
-    </section>}
-
-    <section className="about-band">
-      <div className="shell about-story">
-        <figure data-reveal>
-          <PhotoFrame photo={site.designer.portrait ?? imagery.atelier} sizes="(max-width: 720px) 92vw, 42vw" />
-          {!site.designer.portrait && <figcaption>{imagery.atelier.caption}</figcaption>}
-        </figure>
-        <div>
-          <p className="eyebrow"><i aria-hidden="true" /> Обо мне</p>
-          <h2 id="approach" data-copy-reveal>{site.designer.name || 'Мой подход'}<span className="punctuation">.</span></h2>
-          <p className="body-copy">Планировку начинаю с привычек жильцов. Затем ищу материалы, которые по-разному читаются вблизи и издалека, и проверяю, как меняет их дневной свет.</p>
-          <TextLink href="/about">Познакомиться</TextLink>
-        </div>
-      </div>
+    <section className="studio-hero home-hero" aria-labelledby="hero-title">
+      <h1 id="hero-title" data-hero-line>{site.name}</h1>
+      <p data-hero-meta>Дизайн жилых интерьеров</p>
+      <figure data-hero-image>
+        <PhotoFrame photo={cover} sizes="(max-width: 720px) 96vw, 78vw" priority />
+        <figcaption>Интерьерная визуализация</figcaption>
+      </figure>
     </section>
-    <Endnote title="Начнём с вашего пространства." />
+    <section className="studio-services" aria-labelledby="services-title">
+      <h2 id="services-title">Услуги</h2>
+      <div className="studio-service-grid">
+        {scopes.map((id, index) => {
+          const service = services.find((item) => item.id === id);
+          if (!service) return null;
+          return <Link href="/services" key={id} className="studio-service-card" data-reveal>
+            <svg aria-hidden="true" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth=".8"><path d={icons[index]} /></svg>
+            <h3>{service.title}</h3><p>{service.description}</p>
+          </Link>;
+        })}
+      </div>
+      {scopes.some((id) => !services.find((item) => item.id === id)?.available) && <p className="studio-services-note">Состав и доступность работ уточняются при обсуждении проекта.</p>}
+    </section>
+    <section className="studio-projects" id="work" aria-labelledby="projects-title">
+      <h2 id="projects-title">Избранные проекты</h2>
+      <div className="studio-mosaic">
+        {projects.slice(0, 5).map((project, index) => <ProjectCard key={project.id} project={project} index={index} />)}
+      </div>
+      <TextLink href="/projects">Смотреть все проекты</TextLink>
+    </section>
+    <div className="studio-bottom">
+      <section className="studio-about" aria-labelledby="about-title">
+        <h2 id="about-title">Обо мне</h2>
+        <PhotoFrame photo={site.designer.portrait ?? imagery.atelier} sizes="(max-width: 720px) 90vw, 35vw" />
+        <h3>{site.designer.name || 'Дизайнер интерьера'}</h3>
+        <p>{site.designer.bio || 'Начинаю проект с планировки и привычек жильцов. Затем подбираю материалы и свет, которые поддерживают сценарии жизни дома.'}</p>
+        <TextLink href="/about">Подробнее обо мне</TextLink>
+      </section>
+      <section className="studio-contact" aria-labelledby="contact-title">
+        <h2 id="contact-title">Обсудим проект</h2>
+        <p>Расскажите о пространстве, которое хотите изменить.</p>
+        {!available && <p id="form-unavailable">Приём заявок через сайт пока недоступен.</p>}
+        <InquiryForm available={available} />
+        <Link href="/contact" className="text-link">Контакты <Arrow /></Link>
+      </section>
+    </div>
   </>;
 }
