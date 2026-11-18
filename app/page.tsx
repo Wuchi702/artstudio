@@ -9,7 +9,7 @@ import { webhookTarget } from '@/lib/inquiry';
 import { siteUrl } from '@/lib/site-url';
 import { pageMetadata } from '@/lib/metadata';
 
-const cover = projects[1]?.cover ?? imagery.garden;
+const cover = imagery.light;
 export const metadata = pageMetadata('/', 'Дизайн интерьера', site.description, cover);
 
 const scopes = ['design', 'planning', 'procurement'];
@@ -29,7 +29,7 @@ export default async function Home() {
       <p data-hero-meta>Дизайн жилых интерьеров</p>
       <figure data-hero-image>
         <PhotoFrame photo={cover} sizes="(max-width: 720px) 96vw, 78vw" priority />
-        <figcaption>Интерьерная визуализация</figcaption>
+        <figcaption>Концепция · интерьерная визуализация</figcaption>
       </figure>
     </section>
     <section className="studio-services" aria-labelledby="services-title">

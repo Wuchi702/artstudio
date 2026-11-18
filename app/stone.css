@@ -93,6 +93,7 @@ h1,h2,h3 { font-family: var(--display); font-weight: 500; letter-spacing: -.035e
   body { background: var(--paper); }
   .studio-panel { margin: 0; width: 100%; box-shadow:none; }
   .studio-panel,.site-header,.site-footer { border-radius: 0; }
+  .studio-hero h1 { font-size: clamp(39px, 13vw, 82px); overflow-wrap: normal; }
   .studio-hero .photo-frame { aspect-ratio: 1.32; }
   .studio-mosaic { grid-template-columns: repeat(2,minmax(0,1fr)); grid-template-rows: none; }
   .studio-mosaic .project-card:nth-child(-n+3) { grid-row: auto; }
