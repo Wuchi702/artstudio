@@ -1,5 +1,5 @@
 import { editorial } from '@/data/editorial';
-import { Endnote, PageLead, PhotoFrame } from '@/components/ui';
+import { Endnote, PhotoFrame } from '@/components/ui';
 import { imagery } from '@/data/projects';
 import { principles, site } from '@/data/site';
 import { pageMetadata } from '@/lib/metadata';
@@ -10,14 +10,16 @@ export const metadata = pageMetadata('/about', 'Обо мне', about.intro);
 export default function AboutPage() {
   const { designer } = site;
   return <>
-    <PageLead label={designer.name ? 'Обо мне' : undefined} title={designer.name || 'Обо мне'} text={about.intro} />
-    <section className="shell about-story" aria-labelledby="about-title">
+    <section className="shell about-story about-intro" aria-labelledby="about-title">
       <figure data-reveal>
-        <PhotoFrame photo={designer.portrait ?? imagery.atelier} sizes="(max-width: 720px) 92vw, 46vw" priority />
+        <PhotoFrame photo={designer.portrait ?? imagery.atelier} sizes="(max-width: 720px) 88vw, 28vw" priority />
         {!designer.portrait && <figcaption>{imagery.atelier.caption}</figcaption>}
       </figure>
       <div>
-        <h2 id="about-title" data-copy-reveal>Дизайнер интерьера</h2>
+        <header className="about-intro-heading">
+          <p className="eyebrow">{designer.name ? 'Дизайнер интерьера' : 'ArtStudio'}</p>
+          <h1 id="about-title">{designer.name || 'Обо мне'}</h1>
+        </header>
         <p className="body-copy">{designer.bio || about.approach}</p>
         {designer.specialization && <p className="body-copy">{designer.specialization}</p>}
         {designer.experience && <p className="body-copy">{designer.experience}</p>}

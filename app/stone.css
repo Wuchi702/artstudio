@@ -186,3 +186,20 @@ h1,h2,h3 { font-family: var(--display); font-weight: 500; letter-spacing: -.035e
   from { grid-template-rows: minmax(0, 0fr); }
   to { grid-template-rows: minmax(0, 1fr); }
 }
+
+.about-intro {
+  grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr);
+  gap: clamp(28px, 5vw, 72px);
+  padding-block: clamp(30px, 4.5vw, 66px);
+}
+.about-intro .photo-frame { aspect-ratio: 4 / 5; }
+.about-intro-heading { margin-bottom: clamp(17px, 2.2vw, 30px); }
+.about-intro-heading .eyebrow { color: var(--muted); margin-bottom: 10px; }
+.about-intro-heading h1 { font-size: clamp(48px, 6vw, 86px); color: var(--coffee); }
+.about-intro .body-copy { max-width: 48ch; font-size: clamp(16px, 1.4vw, 20px); }
+@media (max-width: 720px) {
+  .about-intro { grid-template-columns: minmax(0, 1fr); gap: 23px; }
+  .about-intro figure { width: min(100%, 340px); }
+  .about-intro .photo-frame { aspect-ratio: 5 / 4; }
+  .about-intro .photo-frame img { object-position: center 29%; }
+}
