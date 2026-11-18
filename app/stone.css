@@ -218,7 +218,20 @@ h1,h2,h3 { font-family: var(--display); font-weight: 500; letter-spacing: -.035e
 .archive-grid > .project-card { grid-column: auto; width: 100%; max-width: none; margin: 0; }
 .archive-grid .project-card .project-card-photo,
 .gallery-grid .gallery-trigger .photo-frame { aspect-ratio: 4 / 3; }
-.archive-grid .project-card-caption :is(h2, h3) { font-size: clamp(27px, 3vw, 40px); }
+.archive-grid .project-card-caption {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: start;
+}
+.archive-grid .project-card-caption :is(h2, h3) {
+  font-size: clamp(25px, 2.65vw, 36px);
+  line-height: 1.08;
+  min-block-size: 2lh;
+  text-wrap: balance;
+}
+.archive-grid .project-card-caption > :is(.project-index, .arrow) {
+  align-self: start;
+  margin-top: 6px;
+}
 @media (max-width: 720px) {
   .archive-grid { grid-template-columns: minmax(0, 1fr); }
   .project-grid.archive-grid > .project-card { grid-column: 1; }
