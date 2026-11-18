@@ -13,6 +13,10 @@ const cover = imagery.light;
 export const metadata = pageMetadata('/', 'Дизайн интерьера', site.description, cover);
 
 const homeServices = services.filter(({ id, available }) => available && ['design', 'planning', 'home-staging'].includes(id));
+const homeServiceDescriptions: Record<string, string> = {
+  design: 'Планировка, визуализация и рабочие чертежи для ремонта.',
+  'home-staging': 'Оформление готового интерьера по фотографиям'
+};
 const homeProjects = projects.filter(({ featured }) => featured);
 const icons: Record<string, string> = {
   design: 'M3 11l9-7 9 7M5 10v10h14V10M10 20v-6h4v6',
@@ -52,7 +56,7 @@ export default async function Home() {
               <ServiceIcon name={id} />
               <h3>{isDesign ? 'Дизайн интерьера' : title}</h3>
             </div>
-            <p>{isDesign ? 'Планировка, визуализация и рабочие чертежи для ремонта.' : description}</p>
+            <p>{homeServiceDescriptions[id] ?? description}</p>
             <span className="studio-service-more">Подробнее <Arrow /></span>
           </Link>;
         })}
