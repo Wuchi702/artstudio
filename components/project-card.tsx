@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { ProjectCardLink } from './project-card-link';
 import { type Project, projectPath, projectStatus, projectTitle } from '@/data/projects';
 import { categoryLabels } from '@/lib/portfolio';
 import { Arrow, PhotoFrame } from './ui';
@@ -6,7 +6,7 @@ import { Arrow, PhotoFrame } from './ui';
 export function ProjectCard({ project, index, heading: Heading = 'h3' }: { project: Project; index: number; heading?: 'h2' | 'h3' }) {
   const title = projectTitle(project);
   return <article className={`project-card project-card-${project.layout ?? 'landscape'}`} data-reveal>
-    <Link href={projectPath(project)} className="project-card-link">
+    <ProjectCardLink href={projectPath(project)}>
       {project.cover && <div className="project-visual"><PhotoFrame photo={project.cover} className="project-card-photo"
         sizes={Heading === 'h2' ? '(max-width: 720px) 92vw, (max-width: 1216px) 44vw, 500px' : '(max-width: 720px) 45vw, (max-width: 1216px) 18vw, 184px'} />
         <span className="project-hover" aria-hidden="true">Смотреть проект <Arrow /></span>
@@ -19,6 +19,6 @@ export function ProjectCard({ project, index, heading: Heading = 'h3' }: { proje
         </div>
         <Arrow />
       </div>
-    </Link>
+    </ProjectCardLink>
   </article>;
 }

@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { preload } from 'react-dom';
 import type { Photo } from '@/data/projects';
-import { assetPath } from '@/lib/asset-path';
+import { assetPath, imageSourceSet } from '@/lib/asset-path';
 import { site } from '@/data/site';
 
 export function Arrow({ direction = 'diagonal' }: { direction?: 'right' | 'left' | 'down' | 'diagonal' }) {
@@ -18,14 +18,11 @@ export function Wordmark() {
   </Link>;
 }
 
-export function PhotoFrame({ photo, className = '', sizes, priority = false }: {
-  photo: Photo; className?: string; sizes: string; priority?: boolean;
+export function PhotoFrame({ photo, className = '', sizes, priority = false, eager = false }: {
+  photo: Photo; className?: string; sizes: string; priority?: boolean; eager?: boolean;
 }) {
   const src = assetPath(photo.src);
-  const srcSet = photo.widths?.map((width, index, widths) => {
-    const file = index === widths.length - 1 ? src : src.replace(/\.webp$/, `-${width}.webp`);
-    return `${file} ${width}w`;
-  }).join(', ');
+  const srcSet = imageSourceSet(src, photo.widths);
 
   if (priority && srcSet) {
     preload(src, { as: 'image', imageSrcSet: srcSet, imageSizes: sizes, fetchPriority: 'high' });
@@ -33,7 +30,8 @@ export function PhotoFrame({ photo, className = '', sizes, priority = false }: {
 
   const image = <Image src={src} alt={photo.alt} fill sizes={sizes} quality={priority ? 85 : 75}
     unoptimized={srcSet ? true : undefined} preload={priority && !srcSet}
-    loading={priority && srcSet ? 'eager' : undefined} style={{ objectPosition: photo.position }} />;
+    loading={eager || (priority && srcSet) ? 'eager' : undefined} fetchPriority={eager ? 'high' : undefined}
+    style={{ objectPosition: photo.position }} />;
 
   return <span className={`photo-frame ${className}`}>
     {srcSet ? <picture><source srcSet={srcSet} sizes={sizes} />{image}</picture> : image}

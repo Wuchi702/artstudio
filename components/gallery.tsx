@@ -1,9 +1,10 @@
 'use client';
 
 import Image from 'next/image';
+import { preload } from 'react-dom';
 import { useRef, useState } from 'react';
 import type { Photo } from '@/data/projects';
-import { assetPath } from '@/lib/asset-path';
+import { assetPath, imageSourceSet } from '@/lib/asset-path';
 import { wrapIndex } from '@/lib/portfolio';
 import { Arrow, PhotoFrame } from './ui';
 
@@ -17,6 +18,16 @@ export function Gallery({ photos, title, coverSrc }: { photos: Photo[]; title: s
   const change = (direction: number) => setIndex((current) => wrapIndex(current + direction, photos.length));
   const photo = photos[index];
   const next = photos.length > 1 ? photos[wrapIndex(index + 1, photos.length)] : undefined;
+
+  const currentSrc = photo ? assetPath(photo.src) : '';
+  const currentSrcSet = imageSourceSet(currentSrc, photo?.widths);
+  const nextSrc = next ? assetPath(next.src) : '';
+  const nextSrcSet = imageSourceSet(nextSrc, next?.widths);
+  const lightboxSizes = '94vw';
+
+  if (opened && nextSrc && nextSrcSet) {
+    preload(nextSrc, { as: 'image', imageSrcSet: nextSrcSet, imageSizes: lightboxSizes, fetchPriority: 'low' });
+  }
 
   const entries = photos.map((item, at) => ({ item, at }));
   const supplementary = entries.filter(({ item }) => item.src !== coverSrc);
@@ -83,9 +94,13 @@ export function Gallery({ photos, title, coverSrc }: { photos: Photo[]; title: s
           }
           touchStart.current = null;
         }}>
-        {opened && photo && <Image key={index} src={assetPath(photo.src)} alt={photo.alt} fill sizes="94vw" loading="eager" />}
-        {opened && next && <Image src={assetPath(next.src)} alt="" aria-hidden="true" className="visually-hidden"
-          width={1} height={1} sizes="94vw" loading="eager" fetchPriority="low" />}
+        {opened && photo && <picture key={index}>
+          {currentSrcSet && <source srcSet={currentSrcSet} sizes={lightboxSizes} />}
+          <Image src={currentSrc} alt={photo.alt} fill sizes={lightboxSizes} loading="eager"
+            unoptimized={currentSrcSet ? true : undefined} />
+        </picture>}
+        {opened && nextSrc && !nextSrcSet && <Image src={nextSrc} alt="" aria-hidden="true" className="visually-hidden"
+          width={1} height={1} sizes={lightboxSizes} loading="eager" fetchPriority="low" />}
       </div>
       <div className="lightbox-footer">
         <button type="button" disabled={photos.length < 2} aria-label="Предыдущее изображение" onClick={() => change(-1)}><Arrow direction="left" /></button>

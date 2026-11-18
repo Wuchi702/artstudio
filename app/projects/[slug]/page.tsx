@@ -47,7 +47,7 @@ export default async function ProjectPage({ params }: Props) {
       </div>
       {facts.length > 0 && <dl className="case-facts">{facts.map(({ key, value }) => <div key={key}><dt>{key}</dt><dd>{value}</dd></div>)}</dl>}
       {project.cover && <figure className="case-cover">
-        <PhotoFrame photo={project.cover} sizes="(max-width: 720px) 94vw, 88vw" priority />
+        <PhotoFrame photo={project.cover} sizes="(max-width: 720px) 92vw, (max-width: 1216px) 84vw, 1012px" eager />
         {(project.status === 'concept' || project.status === 'visualization') && <figcaption>Интерьерная визуализация</figcaption>}
       </figure>}
     </div>
