@@ -1,6 +1,6 @@
-# Signature Interior
+# ArtStudio
 
-Русскоязычное портфолио «Архив света». Next.js App Router, React, TypeScript, GSAP, локальные Cormorant Garamond и Manrope. Цвет, сетка, адаптивные режимы и состояния собраны в CSS. SIGNATURE INTERIOR — временное название из брифа.
+Персональное портфолио интерьерного дизайнера. Next.js App Router, React, TypeScript, GSAP, локальные Onest и IBM Plex Mono. ArtStudio — редактируемое обозначение проекта.
 
 ## Запуск
 
@@ -23,7 +23,7 @@ npm run dev
 - [data/editorial.ts](data/editorial.ts) — заголовки и тексты страниц.
 - [data/projects.ts](data/projects.ts) — изображения и записи проектов. Добавьте файлы в `public/images/`, укажите `id`, уникальный URL-безопасный `slug`, название, фотографии и известные факты. Порядок задаётся массивом `sections`, появление на главной — `featured`. Используйте `status: 'realized'` для подтверждённого объекта и `status: 'concept'` для концепции.
 
-В текущем архиве три концепции. Материалы и промпты перечислены в [паспорте визуализаций](docs/visual-assets.md). [Художественные направления и референсы](findings.md).
+В текущем архиве три концепции. Материалы и промпты перечислены в [паспорте визуализаций](docs/visual-assets.md). [Арт-дирекшен редизайна](docs/redesign.md).
 
 ## Настройка формы и SEO
 

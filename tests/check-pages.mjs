@@ -18,7 +18,7 @@ for (const file of expected) {
   const canonical = new URL(`${basePath}/${file.replace(/index\.html$/, '')}`, origin);
   assert.ok(html.includes(`rel="canonical" href="${canonical.href}"`), `Incorrect canonical in ${file}`);
 
-  const attributes = html.matchAll(/<(?:a|img|script|source|link)\b(?!(?:[^>]*\brel="preconnect"))[^>]*?\s(?:href|src|srcset)="([^"]+)"/g);
+  const attributes = html.matchAll(/<(?:a|img|script|source|link)\b(?!(?:[^>]*\brel="preconnect"))[^>]*?\s(?:href|src|srcset)="([^"]+)"/gi);
   for (const [, value] of attributes) {
     if (!value.startsWith('/') || value.startsWith('//')) continue;
     const url = new URL(value, origin);

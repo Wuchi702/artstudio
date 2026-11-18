@@ -55,7 +55,7 @@ export default async function ProjectPage({ params }: Props) {
       {sections.map((section) => {
         if (section === 'gallery') return project.gallery?.length ? <section className="case-gallery" key={section}>
           <h2>Галерея</h2>
-          <Gallery photos={project.gallery} title={title} />
+          <Gallery photos={project.gallery} title={title} coverSrc={project.cover?.src} />
         </section> : null;
         if (section === 'floorplan') return project.floorplan ? <section className="case-plan" key={section}>
           <h2>Планировка</h2>

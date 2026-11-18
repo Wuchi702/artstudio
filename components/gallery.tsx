@@ -7,7 +7,7 @@ import { assetPath } from '@/lib/asset-path';
 import { wrapIndex } from '@/lib/portfolio';
 import { Arrow, PhotoFrame } from './ui';
 
-export function Gallery({ photos, title }: { photos: Photo[]; title: string }) {
+export function Gallery({ photos, title, coverSrc }: { photos: Photo[]; title: string; coverSrc?: string }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const closeButton = useRef<HTMLButtonElement>(null);
   const openingButton = useRef<HTMLButtonElement>(null);
@@ -18,6 +18,10 @@ export function Gallery({ photos, title }: { photos: Photo[]; title: string }) {
   const photo = photos[index];
   const next = photos.length > 1 ? photos[wrapIndex(index + 1, photos.length)] : undefined;
 
+  const entries = photos.map((item, at) => ({ item, at }));
+  const supplementary = entries.filter(({ item }) => item.src !== coverSrc);
+  const previews = supplementary.length ? supplementary : entries;
+
   function open(at: number, button: HTMLButtonElement) {
     openingButton.current = button;
     setIndex(at);
@@ -27,11 +31,11 @@ export function Gallery({ photos, title }: { photos: Photo[]; title: string }) {
   }
 
   return <>
-    <div className="gallery-grid">
-      {photos.map((item, at) => <figure key={`${item.src}-${at}`}>
+    <div className={`gallery-grid ${previews.length === 2 ? 'gallery-grid-pair' : ''}`}>
+      {previews.map(({ item, at }, previewIndex) => <figure key={`${item.src}-${at}`}>
         <button type="button" className="gallery-trigger" onClick={(event) => open(at, event.currentTarget)}
           aria-label={`Открыть изображение ${at + 1}: ${item.alt}`}>
-          <PhotoFrame photo={item} sizes={at === 0 ? '(max-width: 720px) 92vw, 88vw' : '(max-width: 720px) 92vw, 44vw'} />
+          <PhotoFrame photo={item} sizes={previewIndex === 0 && previews.length !== 2 ? '(max-width: 720px) 92vw, 88vw' : '(max-width: 720px) 92vw, 44vw'} />
           <span className="gallery-expand"><Arrow /></span>
         </button>
         {item.caption && <figcaption>{item.caption}</figcaption>}

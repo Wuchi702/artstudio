@@ -26,7 +26,7 @@ export function ProjectIndex({ projects }: { projects: Project[] }) {
     const url = new URL(window.location.href);
     if (next === 'all') url.searchParams.delete('category');
     else url.searchParams.set('category', next);
-    window.history.pushState(null, '', url);
+    if (url.href !== window.location.href) window.history.pushState(null, '', url);
   }
 
   return <>

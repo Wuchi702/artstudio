@@ -13,6 +13,10 @@ export function Header() {
   const close = () => {
     if (menu.current) menu.current.open = false;
   };
+  const closeAndRestore = () => {
+    close();
+    toggle.current?.focus();
+  };
   const navigation = [...site.navigation, { label: 'Контакты', href: '/contact' }];
   const current = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
@@ -22,19 +26,19 @@ export function Header() {
       <nav aria-label="Основная навигация" className="desktop-nav">
         {navigation.map(({ label, href }) => <Link key={href} href={href} aria-current={current(href) ? 'page' : undefined}>{label}</Link>)}
       </nav>
-      <details ref={menu} className="mobile-menu" onKeyDown={(event) => {
+      <details ref={menu} className="mobile-menu" onBlur={(event) => {
+        if (event.relatedTarget && !event.currentTarget.contains(event.relatedTarget)) close();
+      }} onKeyDown={(event) => {
         if (event.key === 'Escape' && menu.current?.open) {
-          close();
-          toggle.current?.focus();
+          closeAndRestore();
         }
       }}>
         <summary ref={toggle}><span className="label-open">Меню</span><span className="label-close">Закрыть</span><span className="menu-mark" aria-hidden="true" /></summary>
         <nav aria-label="Развёрнутая навигация" className="mobile-panel">
-          <Link onClick={close} href="/" aria-current={pathname === '/' ? 'page' : undefined}>Главная</Link>
+          <Link onClick={closeAndRestore} href="/" aria-current={pathname === '/' ? 'page' : undefined}>Главная</Link>
           {navigation.map(({ label, href }) =>
-            <Link key={href} onClick={close} href={href} aria-current={current(href) ? 'page' : undefined}>{label}<Arrow /></Link>
+            <Link key={href} onClick={closeAndRestore} href={href} aria-current={current(href) ? 'page' : undefined}>{label}<Arrow /></Link>
           )}
-          <Link className="mobile-cta" onClick={close} href="/contact">{site.cta}</Link>
         </nav>
       </details>
     </div>

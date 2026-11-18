@@ -20,6 +20,9 @@ export function Motion() {
     const wide = window.matchMedia('(min-width: 721px)').matches;
     const hero = main.querySelector('.home-hero');
     const reveals = wide ? Array.from(main.querySelectorAll('[data-reveal],[data-copy-reveal]')) : [];
+    if (!changed && !hero && reveals.length === 0) {
+      return;
+    }
     const plugin = reveals.length ? import('gsap/ScrollTrigger') : Promise.resolve(undefined);
 
     void Promise.all([import('gsap'), plugin]).then(([{ gsap }, scroll]) => {
@@ -38,6 +41,12 @@ export function Motion() {
             .from(hero.querySelectorAll('[data-hero-line]'), { yPercent: 104, duration: 0.62, stagger: 0.075 }, 0.13)
             .from(document.querySelector('.header-inner'), { y: -12, opacity: 0.3, duration: 0.42 }, 0.28)
             .from(hero.querySelectorAll('[data-hero-meta]'), { y: 9, opacity: 0.45, stagger: 0.055, duration: 0.44 }, 0.36);
+        }
+
+        const heroPhoto = hero?.querySelector('[data-hero-image] img');
+        if (wide && scroll && hero && heroPhoto) {
+          gsap.to(heroPhoto, { yPercent: 3, scale: 1.065, ease: 'none',
+            scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
         }
 
         for (const element of reveals) {

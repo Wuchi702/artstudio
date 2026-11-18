@@ -20,7 +20,7 @@ export default function Home() {
             <span className="hero-line"><span data-hero-line>Интерьеры</span></span>
             <span className="hero-line"><span data-hero-line>с характером<span className="hero-dot">.</span></span></span>
           </h1>
-          <p className="hero-description" data-hero-meta>Жилые пространства. Планировка, материалы и свет в масштабе повседневной жизни.</p>
+          <p className="hero-description" data-hero-meta>Планировка, материалы и свет для повседневной жизни.</p>
           <Link href="#work" className="hero-cta" data-hero-meta>Смотреть работы<Arrow direction="down" /></Link>
         </div>
         <div className="hero-caption" data-hero-meta>
