@@ -12,7 +12,7 @@ import { pageMetadata } from '@/lib/metadata';
 const cover = imagery.light;
 export const metadata = pageMetadata('/', 'Дизайн интерьера', site.description, cover);
 
-const scopes = ['design', 'planning', 'procurement'];
+const scopes = ['design', 'planning', 'home-staging'];
 const icons = [
   'M3 11l9-7 9 7M5 10v10h14V10M10 20v-6h4v6',
   'M4 4h16v16H4zM10 4v9h10M4 15h6v5',
@@ -48,10 +48,9 @@ export default async function Home() {
     </section>
     <section className="studio-projects" id="work" aria-labelledby="projects-title">
       <h2 id="projects-title">Избранные проекты</h2>
-      <div className="studio-mosaic">
+      <div className="studio-project-grid">
         {projects.slice(0, 5).map((project, index) => <ProjectCard key={project.id} project={project} index={index} />)}
       </div>
-      <TextLink href="/projects">Смотреть все проекты</TextLink>
     </section>
     <div className="studio-bottom">
       <section className="studio-about" aria-labelledby="about-title">
