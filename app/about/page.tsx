@@ -17,14 +17,14 @@ export default function AboutPage() {
         {!designer.portrait && <figcaption>{imagery.atelier.caption}</figcaption>}
       </figure>
       <div>
-        <h2 id="about-title" data-copy-reveal>{about.heading[0]}<br/>{about.heading[1]}</h2>
+        <h2 id="about-title" data-copy-reveal>Дизайнер интерьера</h2>
         <p className="body-copy">{designer.bio || about.approach}</p>
         {designer.specialization && <p className="body-copy">{designer.specialization}</p>}
         {designer.experience && <p className="body-copy">{designer.experience}</p>}
       </div>
     </section>
     <section className="shell principle-section" aria-labelledby="principles-title">
-      <h2 id="principles-title">Принципы работы</h2>
+      <h2 id="principles-title">Почему выбирают меня</h2>
       <ol className="principle-list">
         {principles.map((item) => <li key={item.title}><h3>{item.title}</h3><p className="body-copy">{item.text}</p></li>)}
       </ol>

@@ -26,7 +26,7 @@ export default async function Home() {
   return <>
     <section className="studio-hero home-hero" aria-labelledby="hero-title">
       <h1 id="hero-title" data-hero-line>{site.name}</h1>
-      <p data-hero-meta>Дизайн жилых интерьеров</p>
+      <p data-hero-meta>Дизайн интерьера: от планировки до реализации</p>
       <figure data-hero-image>
         <PhotoFrame photo={cover} sizes="(max-width: 720px) 96vw, 78vw" priority />
         <figcaption>Концепция · интерьерная визуализация</figcaption>
@@ -38,7 +38,7 @@ export default async function Home() {
         {scopes.map((id, index) => {
           const service = services.find((item) => item.id === id);
           if (!service) return null;
-          return <Link href="/services" key={id} className="studio-service-card" data-reveal>
+          return <Link href={`/services#${id}`} key={id} className="studio-service-card" data-reveal>
             <svg aria-hidden="true" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth=".8"><path d={icons[index]} /></svg>
             <h3>{service.title}</h3><p>{service.description}</p>
           </Link>;
